@@ -161,17 +161,24 @@ point you there instead.
 ## How to install or use
 
 Exact deployment depends on your Cowork environment, so treat these as general
-steps:
+steps.
 
-1. Open [`skill/precost.md`](skill/precost.md) and copy its contents (and the
-   companion reference files in the same folder, if your setup supports
-   multi-file skills).
-2. Create a **new custom skill** in Cowork.
-3. Paste in the skill instructions.
-4. Name it **`Pre-cost`**.
-5. Optionally assign it the command **`/precost`**.
-6. **Test it with a task first** — run `/precost` on something before you run the
-   real Cowork workflow, and sanity-check the estimate against your own judgment.
+### Quick start — download the ready-to-use bundle
+
+📦 **[Download `precost-skill.zip`](precost-skill.zip?raw=1)** — all the skill
+files in one go (`SKILL.md` + the three companion reference files, in a `precost/`
+folder).
+
+1. Download and unzip **[`precost-skill.zip`](precost-skill.zip?raw=1)**.
+2. Create a **new custom skill** in Cowork and add the `precost/` folder (or paste
+   in `SKILL.md` and its companion files).
+3. Name it **`Pre-cost`** and optionally assign it the command **`/precost`**.
+4. **Test it with a task first** — run `/precost` on something before your real
+   Cowork workflow, and sanity-check the estimate against your own judgment.
+
+> Prefer to browse first? The same files live unzipped under
+> [`skill/`](skill/) — open [`skill/precost.md`](skill/precost.md) and copy the
+> contents (plus the companion files, if your setup supports multi-file skills).
 
 Once it's in place, just add `/precost` to (or before) any task you're unsure
 about.
