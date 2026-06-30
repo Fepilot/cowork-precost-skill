@@ -20,11 +20,16 @@ GitHub:
 
 | File | What it should show | Status |
 |---|---|---|
-| `screenshots/cost-skill-example.png` | The built-in `/cost` command output — the "receipt" after a task | Placeholder — add your own |
+| `screenshots/precost-carousel.gif` | Animated preview cycling the 3 real screenshots (shown at the top of the README) | ✅ Included |
+| `screenshots/cost-skill-example.png` | The built-in `/cost` command output after a task | Placeholder — add your own |
 | `screenshots/precost-skill-example.png` | A Pre-cost pre-check card with the "how to run" options | ✅ Included |
 | `screenshots/decision-flow.png` | A simple Cowork-vs-lighter-tool decision diagram | Placeholder — add your own |
 | `screenshots/precost-marginal-example.png` | A *Marginal* verdict on a simple email task | ✅ Included |
 | `screenshots/how-to-run.png` | Adding `/precost` to a task to trigger the skill | ✅ Included |
+
+To regenerate the animated carousel after changing the screenshots, rebuild
+`precost-carousel.gif` from the three PNGs (any image tool or a short Pillow
+script works) and keep it ~800px wide so it stays light.
 
 The placeholders are referenced in the README already — once you drop the real
 PNGs in with those exact names, the images appear automatically. No README edits

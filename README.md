@@ -1,5 +1,9 @@
 # Cowork Pre-cost Skill
 
+<p align="center">
+  <img src="screenshots/precost-carousel.gif" alt="Pre-cost in action — the pre-check card, the verdict, and the how-to-run options" width="820">
+</p>
+
 A custom **Copilot Cowork** skill that estimates what a task will likely **cost
 and return _before_ you run it** — so you can decide whether to proceed in Cowork,
 run it in a leaner way, or use Microsoft 365 Copilot / Copilot Chat instead.
@@ -34,7 +38,7 @@ recommendation:
 - ✅ **Proceed in Cowork** — the task is a good fit and the time saved is worth it.
 - 🌱 **Proceed in Cowork, but leaner** — same outcome, fewer credits (e.g. a
   lighter model, a converted attachment, tighter scope).
-- 🚗 **Use Microsoft 365 Copilot / Copilot Chat instead** — a small task a
+- 💬 **Use Microsoft 365 Copilot / Copilot Chat instead** — a small task a
   per-seat tool can do with no metered Cowork credits.
 - ✂️ **Simplify or split the task** — it's too big or broad as written.
 
@@ -56,25 +60,8 @@ make a better decision before spending credits.
 Think of it as a lightweight gate at the start of a task, not a brake on your
 work. It's advisory — it never blocks anything.
 
----
-
-## The car vs. train analogy
-
-The easiest way to think about all of this:
-
-| | What it's like | Best for |
-|---|---|---|
-| **Microsoft 365 Copilot** | A **car** 🚗 | Flexible, fast, great for simple one-off trips |
-| **Copilot Cowork** | A **train** 🚆 | Larger, multi-step, multi-source or parallel journeys |
-| **`/cost`** | The **receipt** 🧾 | Checking what the journey cost *after* you arrived |
-| **Pre-cost** | **Google Maps** 🗺️ | Checking the route, fuel, traffic and options *before* leaving |
-
-> **`/cost` tells you how much the trip cost after you have taken it.**
-> **Pre-cost helps you decide whether the trip is worth taking before you start.**
-
-You wouldn't take the train two stops to buy milk, and you wouldn't drive a car
-across the country with ten people and all their luggage. Pre-cost is the quick
-check that helps you pick the right vehicle.
+> **`/cost` tells you how much a task cost after it has run.**
+> **Pre-cost helps you decide whether it's worth running before you start.**
 
 ---
 
@@ -166,8 +153,8 @@ Cowork credits**:
 - Simple brainstorming.
 - Low-value tasks where Cowork would be overkill.
 
-If you find yourself reaching for the train to go two stops, Pre-cost will
-gently point you back to the car.
+If a per-seat tool can do the job with no metered credits, Pre-cost will gently
+point you there instead.
 
 ---
 
@@ -193,27 +180,29 @@ about.
 
 ## Screenshots
 
-> A built-in `/cost` example and a decision-flow diagram are placeholders for now
-> — add your own images at the paths below.
-
-**Built-in `/cost` example** (after a task — the receipt):
-
-![Built-in cost skill example](screenshots/cost-skill-example.png)
+The animated preview at the top of this README cycles through the three real
+screenshots below. Here they are individually:
 
 **Pre-cost pre-check** — the card and the "how to run" options:
 
 ![Pre-cost skill example](screenshots/precost-skill-example.png)
 
-**Decision flow** — Cowork vs. a lighter tool:
+**A "Marginal" verdict** — a simple email task a per-seat tool can do for free:
 
-![Decision flow](screenshots/decision-flow.png)
+![Pre-cost marginal example](screenshots/precost-marginal-example.png)
 
-Extra real examples included in this repo:
+**How to run it** — add `/precost` to a task to trigger the skill:
 
-- A **marginal** verdict on a simple email task → see
-  [`screenshots/precost-marginal-example.png`](screenshots/precost-marginal-example.png).
-- **How to run it** — adding `/precost` to a task → see
-  [`screenshots/how-to-run.png`](screenshots/how-to-run.png).
+![How to run](screenshots/how-to-run.png)
+
+> Two more placeholders are referenced for you to add later — a built-in `/cost`
+> example and a decision-flow diagram. Drop PNGs at
+> `screenshots/cost-skill-example.png` and `screenshots/decision-flow.png` and
+> they'll appear automatically:
+>
+> ![Built-in cost skill example](screenshots/cost-skill-example.png)
+>
+> ![Decision flow](screenshots/decision-flow.png)
 
 See [`docs/screenshots.md`](docs/screenshots.md) for how to place and reference
 images.
