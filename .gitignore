@@ -1,0 +1,27 @@
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+desktop.ini
+*~
+.vscode/
+.idea/
+
+# Logs and temp files
+*.log
+*.tmp
+tmp/
+temp/
+
+# Local environment / secrets (never commit these)
+.env
+.env.*
+*.local
+
+# Node (only if you add tooling later)
+node_modules/
+
+# Python (only if you add tooling later)
+__pycache__/
+*.pyc
+.venv/
+venv/
