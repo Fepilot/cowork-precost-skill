@@ -164,31 +164,16 @@ point you there instead.
 
 ## How to install or use
 
-Exact deployment depends on your Cowork environment, so treat these as general
-steps.
+1. **[Download `precost-skill-v2.zip`](precost-skill-v2.zip?raw=1).**
+2. Open a **new chat in Cowork** and **upload the `.zip` file** there.
+3. Ask Cowork to **create the skill** and name its command **`/precost`**.
 
-### Quick start — download the ready-to-use bundle
-
-📦 **[Download `precost-skill-v2.zip`](precost-skill-v2.zip?raw=1)** — all the skill
-files in one go (`SKILL.md` + the three companion reference files, in a `precost/`
-folder). **This is v2** (current) — the corrected cost formula and pricing notes.
-
-1. Download and unzip **[`precost-skill-v2.zip`](precost-skill-v2.zip?raw=1)**.
-2. Create a **new custom skill** in Cowork and add the `precost/` folder (or paste
-   in `SKILL.md` and its companion files).
-3. Name it **`Pre-cost`** and optionally assign it the command **`/precost`**.
-4. **Test it with a task first** — run `/precost` on something before your real
-   Cowork workflow, and sanity-check the estimate against your own judgment.
+That's it — from then on, just add `/precost` to (or before) any task you're
+unsure about.
 
 > Prefer to browse first? The same files live unzipped under
-> [`skill/`](skill/) — open [`skill/precost.md`](skill/precost.md) and copy the
-> contents (plus the companion files, if your setup supports multi-file skills).
->
-> Looking for the original release? The previous bundle and skill files are kept
-> under [`archive/v1/`](archive/v1/).
-
-Once it's in place, just add `/precost` to (or before) any task you're unsure
-about.
+> [`skill/`](skill/) — open [`skill/precost.md`](skill/precost.md). The previous
+> release is kept under [`archive/v1/`](archive/v1/).
 
 ---
 
