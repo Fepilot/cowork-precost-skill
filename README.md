@@ -167,11 +167,11 @@ steps.
 
 ### Quick start — download the ready-to-use bundle
 
-📦 **[Download `precost-skill.zip`](precost-skill.zip?raw=1)** — all the skill
+📦 **[Download `precost-skill-v2.zip`](precost-skill-v2.zip?raw=1)** — all the skill
 files in one go (`SKILL.md` + the three companion reference files, in a `precost/`
-folder).
+folder). **This is v2** (current) — the corrected cost formula and pricing notes.
 
-1. Download and unzip **[`precost-skill.zip`](precost-skill.zip?raw=1)**.
+1. Download and unzip **[`precost-skill-v2.zip`](precost-skill-v2.zip?raw=1)**.
 2. Create a **new custom skill** in Cowork and add the `precost/` folder (or paste
    in `SKILL.md` and its companion files).
 3. Name it **`Pre-cost`** and optionally assign it the command **`/precost`**.
@@ -181,6 +181,9 @@ folder).
 > Prefer to browse first? The same files live unzipped under
 > [`skill/`](skill/) — open [`skill/precost.md`](skill/precost.md) and copy the
 > contents (plus the companion files, if your setup supports multi-file skills).
+>
+> Looking for the original release? The previous bundle and skill files are kept
+> under [`archive/v1/`](archive/v1/).
 
 Once it's in place, just add `/precost` to (or before) any task you're unsure
 about.

@@ -27,7 +27,7 @@ The authoritative, real numbers are always the **Copilot Credit Guide** and the
 | Product | What it is | Seat cost |
 |---------|-----------|-----------|
 | **Microsoft 365 Copilot Chat** | Web-grounded AI chat, included with eligible Microsoft 365 plans. Custom/agent usage is metered. | **Included — no additional cost** |
-| **Microsoft 365 Copilot** (per-seat add-on) | Adds Work IQ, Copilot in Teams & the M365 apps, prebuilt agents (Researcher, Analyst, Facilitator), and **access to Cowork**. | **Paid per-seat add-on** — enterprise list price around **$30 user/month**; SMB and other segments differ, and promotions change, so confirm current pricing on the official Microsoft 365 Copilot pricing page. |
+| **Microsoft 365 Copilot** (per-seat add-on) | Adds Work IQ, Copilot in Teams & the M365 apps, prebuilt agents (Researcher, Analyst, Facilitator), and **access to Cowork**. | **Paid per-seat add-on — enterprise list price around $30 user/month; SMB and other segments differ, and promotions change, so confirm current pricing on the official Microsoft 365 Copilot pricing page.** |
 | **Copilot Cowork** | The agentic system (this product). Runs long, multi-step tasks across M365. | **No separate seat fee — requires the Microsoft 365 Copilot license, and *all Cowork usage is metered* via Copilot Credits** (see §2). |
 
 **Key rule:** A Microsoft 365 Copilot license is the *entry ticket* to Cowork; the
@@ -121,10 +121,10 @@ Attachments are a major part of "context retrieved." **Format drives token/credi
 weight far more than file size** — the same content as clean Markdown is cheapest;
 PDFs, slides, and images cost multiples more. Weights are relative to `.md = 1×`.
 
-Use these weights to decide **whether an input is heavy enough to bump the task up one
-class** in §7 (rule of thumb: **≥ ~2× is a heavy input** — `.pptx`, scanned/image PDFs,
-several images). They are a **guide for the class bump, not a literal multiplier** on
-the base band (see §7 for why).
+Use these weights to decide whether an input is heavy enough to bump the task up
+one class in §7 (rule of thumb: ≥ ~2× is a heavy input — `.pptx`, scanned/image
+PDFs, several images). They are a guide for the class bump, not a literal
+multiplier on the base band (see §7 for why).
 
 | Attachment | Relative token/credit weight |
 |------------|------------------------------|
@@ -166,36 +166,34 @@ Pick the class by the **heaviest signal present**:
 ## 7. Putting it together — the adjustment formula — PLANNING ESTIMATE
 
 ```
+effective_class  = base_class, bumped up one level for a heavy input / expensive tool
 adjusted_credits ≈ base_band(effective_class) × model_multiplier
 adjusted_cost_usd ≈ adjusted_credits × $0.01
 ```
 
-Only **two** things scale the base band, so the estimate stays reproducible and the
-**badge always matches the number**:
+Only **two** levers move the number, so the quoted band always stays tied to the
+Light / Medium / Heavy badge:
 
-1. **effective_class** — start from the Step 2 class, then move it **at most one
-   level**:
-   - **Up one level** (Light→Medium, Medium→Heavy) if a **heavy input** is attached
-     (`.pptx`, scanned/photographed PDF, or several images — see §5) **or** the task
-     needs an **expensive tool** (`ImageGenerate`, `deep-research`, browser
-     automation, subagents). Move by the single heaviest driver — don't stack bumps.
-     Heavy is open-ended, so if you're already Heavy, stay Heavy and read the upper end.
-   - **Down one level** if it's a single trivial read on a light input
-     (`.md` / `.txt` / `.csv`) with no extra tools.
-   - Otherwise keep the Step 2 class.
-2. **model_multiplier** (§4) — the base bands are anchored to **Opus 4.8 = 1.0×**, so
-   Opus is a no-op; e.g. **Sonnet 0.6×** turns a 300–700 band into ≈ 180–420 credits,
-   and a 2.0× premium model pushes it up.
+1. **A one-level class bump (§6 → §6).** Start from the base class you picked in
+   §6, then move it **up one level** when the task carries a **heavy input**
+   (`.pptx`, scanned/image PDFs, several images — the ≥ ~2× rows in §5) **or an
+   expensive tool** (`ImageGenerate`, `deep-research`, browser automation,
+   subagents). Move it **down one level** only for a single trivial light read
+   (e.g. summarise one short `.md`). Read the credit band from §6 for this
+   **effective class** — e.g. a Medium task with a `.pptx` becomes **Heavy →
+   700+ credits**, not a Medium band scaled by a weight.
+2. **The model multiplier (§4).** Scale that band by the active model's
+   multiplier, anchored to the Cowork default **Opus 4.8 = 1.0×** — e.g. Sonnet
+   0.6× turns a 300–700 band into ≈ 180–420 credits; a 2.0× premium model pushes
+   it up.
 
-- **Why not multiply by attachment weight and a context/tool factor directly?** The
-  class already prices context, runtime, tools and deliverables (Step 2). Multiplying
-  the whole base *again* by a 2–4× attachment weight would (a) double-count those
-  signals and (b) detach the number from the badge — a "Light" task could read
-  350–1,050 credits. The **one-level class bump** captures "format and tools matter"
-  without either problem. The §5 weight table now tells you **whether an input is heavy
-  enough to bump the class** — it is no longer a literal multiplier on the base.
-- Keep the result a **band**, never a single false-precise number. Round to clean
-  ranges, e.g. **"≈ 200–450 credits · ≈ $2–4.50 (Sonnet 4.6)."**
+**Do not also multiply by attachment weight or a separate context/tool factor.**
+Attachment weight (§5) only decides whether an input is heavy enough to trigger
+the class bump — applying it as a multiplier *and* bumping the class would
+double-count the same signal and detach the number from the badge (that was the
+old formula's bug). Keep the result a **band**, never a single false-precise
+number. Round to clean ranges, e.g. **"≈ 200–450 credits · ≈ $2–4.50
+(Sonnet 4.6)."**
 
 ---
 

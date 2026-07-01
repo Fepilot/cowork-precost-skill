@@ -2,58 +2,58 @@
 name: precost
 description: |
   Runs a fast, visual "cost & value" pre-check on a Copilot Cowork task BEFORE
-  the work starts. Reads five cheap, local cost signals — the model in use, the
-  size of the context, the likely runtime, the tools / skills / plugins the task
-  will need, and the weight of any attachments (an .md costs far less than a .pdf,
-  image, or .pptx). Classifies the task as Light / Medium / Heavy, estimates the
-  Copilot Credits and dollar cost, estimates the time saved and business value,
-  shows it inline as a compact card with a short disclaimer, surfaces
-  sustainability recommendations when the task could run leaner, then asks whether
-  to proceed in Cowork, proceed in Cowork more sustainably, or use a lighter tool
-  (Copilot Chat / M365 Copilot) instead.
+  the work starts. Builds the most approximate credit estimate it can by reading
+  five real cost signals — the model in use, the size of the context, the likely
+  runtime, the tools / skills / plugins the task will need, and the weight of any
+  attachments (an .md costs far less than a .pdf, image, or .pptx). Classifies the
+  task as Light / Medium / Heavy, estimates the Copilot Credits and dollar cost,
+  estimates the time saved and value returned (from the Cowork ROI time-savings
+  methodology), shows it as an Adaptive Card inline with a concise disclaimer,
+  surfaces sustainability recommendations when the task could run leaner, then asks
+  whether to proceed in Cowork, proceed in Cowork in a more sustainable way, or use
+  a lighter tool (Copilot Chat / M365 Copilot) instead.
   Invoke it when the user types "/precost", "precost", "precost check",
-  "pre-check first", "cost check", "estimate this task", "what will this cost",
-  "is this worth running in Cowork", or "should I run this here" — and at the start
-  of every NEW task the user delegates to Cowork.
+  "pre-check first", "cost check", "cost check first", "estimate this task",
+  "what will this cost", "is this worth running in Cowork", or "should I run this
+  here" — and at the start of every NEW task the user delegates to Cowork.
   Do NOT use for follow-up questions or refinements WITHIN a task already in
-  progress — it runs once per new task, not on every message. Do NOT use to report
-  the real metered cost of a finished task (that is the built-in /cost command and
-  the Cost Management dashboard, not this estimate).
+  progress — it runs once per new task, not on every message. Do NOT use to
+  report the real metered cost of a finished task (that is the built-in /cost
+  command and the Cost Management dashboard, not this estimate).
 cowork:
   category: analysis
   icon: Calculator
 ---
 
-# Pre-cost — Cowork Task Cost & ROI Pre-check
+# precost — Cowork Task Cost & ROI Pre-check
 
 A lightweight gate that runs **once at the start of a new task** (or whenever the
-user types **`/precost`**). Before any credits are spent, it tells the user
-roughly what the task will **cost** and what it will **return**, shows it inline,
-points out how to run it more **sustainably**, and lets them decide whether to
-proceed, proceed leaner, or switch to a cheaper tool.
-
-> **Pre-cost is an unofficial, user-created incubation skill. Every figure it
-> produces is an estimate, not a bill or a spending limit.** The authoritative
-> numbers are the built-in `/cost` command and the Cost Management dashboard,
-> which run *after* a task completes.
+user types **`/precost`**). It tells the user, before any credits are spent,
+roughly what the task will **cost** and what it will **return**, shows it
+visually inline, points out how to run it more **sustainably**, and lets them
+decide whether to proceed, proceed leaner, or switch to a cheaper tool.
 
 Keep it **fast**. This is a quick estimate, not research. The only lookups
-allowed are cheap, local ones: read the active model from the session, list
-attachments, and read the companion reference files in this folder. Do **not**
-call search, email, calendar, web, or file-content tools to produce the estimate.
+allowed are the cheap, local ones: read the active model from the session, list
+attachments with `Glob`, and **Read the companion reference files in this
+folder**. Do **not** call search, email, calendar, web, or file-content tools to
+produce the estimate.
 
-## Companion reference files (load on demand — cheap local reads)
+## Reference files (load on demand — cheap local Reads)
 
-The pricing and value detail lives in three files in this folder so this workflow
-stays short. **Read the relevant file when a step says to.**
+All the pricing/value detail lives in three files in this folder so this workflow
+stays short. **Read the relevant file when the step says to** — a local `Read` is
+cheap and fast, unlike web/search.
 
-- **`pricing-reference.md`** — model cost multipliers, attachment weights, base
-  credit bands, and the adjustment formula. Use it in Steps 1–3.
-- **`value-and-routing.md`** — time-saved / value bands and formula, verdict
-  logic, which-Copilot-to-use routing, and step-by-step instructions for doing
-  the task in M365 Copilot / Copilot Chat. Use it in Steps 4, 6, and 8.
-- **`card-template.md`** — the ready-to-fill visual card skeleton. Use it in
-  Step 7.
+- **`pricing-reference.md`** — official Cowork/Copilot pricing, the credit model,
+  model cost multipliers (§4), attachment weights (§5), base credit bands (§6),
+  and the adjustment formula (§7). Use it in Steps 1–3.
+- **`value-and-routing.md`** — time-saved/value bands & formula (§1), verdict
+  logic (§2), which-Copilot-to-use routing (§3), and the **step-by-step
+  instructions** for doing the task in M365 Copilot / Copilot Chat (§4). Use it in
+  Steps 4, 6, and 8.
+- **`card-template.md`** — the ready-to-fill Adaptive Card JSON skeleton. Use it
+  in Step 7.
 
 These files are the **single source of truth** for every number this skill
 quotes. Do not invent figures that aren't in them.
@@ -61,156 +61,191 @@ quotes. Do not invent figures that aren't in them.
 ## When to run
 
 - The user types **`/precost`** (or "precost", "pre-check first", "cost check").
-- The user has just delegated a **new task** to Cowork — the first substantive
-  request of a task (e.g. "prep me for my customer meeting and build a deck",
-  "analyze this data and produce a report", "draft and send the team update").
+- The user has just delegated a **new task** to Cowork (the first substantive
+  request of a task), e.g. "prep me for my customer meeting and build a deck",
+  "analyze this data and produce a report", "draft and send the team update".
 
-## When NOT to run
+## When NOT to Use (when NOT to run)
 
 - **Follow-ups within the same task** — "make the title bigger", "add a slide",
-  "now email it too". The pre-check already ran; don't run it again.
-- Pure questions / chit-chat that aren't a delegated task.
+  "change the tone", "now email it too". The pre-check already ran for this task;
+  do not run it again.
+- Pure questions / chit-chat that aren't a delegated task ("what's on my
+  calendar?", "who is the PM for X?").
 - A request for the **actual** cost of a completed task — point the user to the
   built-in `/cost` command and the Cost Management dashboard instead.
 
 ## Step 1 — Gather the five cost signals (cheap, local only)
 
-Read these five signals from the prompt + session + a quick attachment listing:
+Read these five signals to build the most approximate estimate, from the prompt +
+session + a quick attachment listing only — no expensive lookups.
 
-1. **Model in use.** Detect the active model and apply its credit multiplier
-   (`pricing-reference.md` §4, anchored to the Cowork default Opus 4.8 = 1.0×;
-   1 credit ≈ $0.01). If it can't be determined, assume Opus 4.8 (1.0×) and say so.
-2. **Context size.** Roughly how much material the model must read/hold. Judge it
-   **small / moderate / large**.
-3. **Runtime.** Light ≈ under a minute; Medium ≈ 1–3 min; Heavy ≈ 3 min+.
-4. **Tools / skills / plugins.** Cheap (a single read), moderate (multi-source
-   search, a doc skill, a few tool calls), or expensive (image generation, deep
-   research, browser automation, subagents).
-5. **Attachments.** List them and note type + size. **Format drives credit weight
-   far more than file size** (`pricing-reference.md` §5; `.md` cheapest).
+1. **Model in use.** Detect the active model from the session/environment, then
+   apply its credit multiplier. **The multiplier table is `pricing-reference.md`
+   §4** (anchored to the Cowork default, **Opus 4.8 = 1.0×**; 1 credit ≈ $0.01).
+   If the model can't be determined, assume the Cowork default (Opus 4.8, 1.0×)
+   and say so on the card.
+2. **Context size.** Roughly how much material the model must read/hold — sources,
+   timeframe, attachment size, prior conversation. More context = more input
+   tokens = more credits. Judge it **small / moderate / large**.
+3. **Runtime.** Roughly how long it runs (more turns + tool calls = more credits).
+   Light ≈ under a minute; Medium ≈ 1–3 min; Heavy ≈ 3 min+.
+4. **Tools / skills / plugins.** Which capabilities the task invokes:
+   - **Cheap:** a single read (one calendar/email/file), one render card.
+   - **Moderate:** multi-source M365 search, a doc skill (`docx`/`xlsx`/`pptx`),
+     a few tool calls.
+   - **Expensive:** `ImageGenerate`, `deep-research`, browser automation,
+     multi-step workflows, or anything that spawns subagents.
+5. **Attachments.** List them (`Glob input/**/*`) and note type + size. **Format
+   drives credit weight far more than file size — the weight table is
+   `pricing-reference.md` §5.** (`.md` cheapest; PDFs/slides/images cost
+   multiples more.)
 
-> Read `pricing-reference.md` now for the model-multiplier and attachment-weight
-> tables.
+> Read `pricing-reference.md` now to pull the model-multiplier and
+> attachment-weight tables for Steps 1–3.
 
 ## Step 2 — Classify the base task (Light / Medium / Heavy)
 
 Judge the task on sources, reasoning depth, and deliverables to set the **base**
-credit band (`pricing-reference.md` §6). Pick the class by the **heaviest signal
-present** — one short summary = Light; a multi-source briefing + Excel + deck =
-Medium; a 6-month analysis + leadership report = Heavy.
+credit band. **The band table (credits + USD per class) is `pricing-reference.md`
+§6.** Pick the class by the **heaviest signal present** (one short email summary =
+Light; multi-source briefing + Excel + deck = Medium; 6-month data analysis +
+leadership report vs. prior period = Heavy).
 
 ## Step 3 — Adjust the estimate (model + one class bump)
 
-Start from the base band, then adjust it with only **two** levers, using the
-formula in `pricing-reference.md` §7:
+Turn the base band into the final band with the formula in **`pricing-reference.md`
+§7** — deliberately just **two** levers, so the estimate is reproducible and the
+badge always matches the number:
 
 ```
-effective_class  = base_class, bumped up one level for a heavy input / expensive tool
 adjusted_credits ≈ base_band(effective_class) × model_multiplier
-adjusted_cost_usd ≈ adjusted_credits × $0.01
 ```
 
-1. **One-level class bump.** Move the base class **up one level** for a **heavy
-   input** (`.pptx`, scanned/image PDFs, several images — the ≥ ~2× rows in §5)
-   **or an expensive tool** (image generation, deep research, browser
-   automation, subagents). Move it **down one level** only for a single trivial
-   light read. Read the band from §6 for this *effective* class.
-2. **Model multiplier.** Scale that band by the active model's multiplier,
-   anchored to Opus 4.8 = 1.0× (Sonnet 0.6× eases it down; a 2.0× premium model
-   pushes it up).
-
-**Do not also multiply by attachment weight or a context/tool factor** — the
-attachment weight only decides whether to trigger the class bump; multiplying by
-it as well would double-count the same signal (the old formula's bug) and detach
-the number from the badge.
-
-Keep the result a **band**, never false-precise — e.g.
-"≈ 200–450 credits · ≈ $2–4.50 (Sonnet 4.6)".
+- **effective_class:** start from the Step 2 class, then **bump up one level** if a
+  **heavy input** (`.pptx`, scanned PDF, or several images) **or** an **expensive
+  tool** (`ImageGenerate`, `deep-research`, browser automation, subagents) is present;
+  **bump down** for a single trivial read on a light (`.md`/`.txt`/`.csv`) input;
+  otherwise keep it. Move by the heaviest driver only — don't stack bumps.
+- **model_multiplier:** apply §4 (Opus 4.8 = 1.0× baseline; Sonnet 4.6 ≈ 0.6×; etc.).
+- Do **not** also multiply by attachment weight or a context/tool factor — the class
+  already prices context, runtime and tools, and the §5 weights only decide the bump.
+- Keep the result a **band**, never false-precise. Round to clean ranges, e.g.
+  **"≈ 200–450 credits · ≈ $2–4.50 (Sonnet 4.6)."**
 
 ## Step 4 — Estimate the return (time saved + value)
 
-Map the task to the Cowork ROI categories and **sum the typical minutes saved**
-for the categories it touches (`value-and-routing.md` §1). Apply the value
-formula with the default `HOURLY_RATE` (€75/hr; state it so it's transparent).
-Cost is USD; value is the user's currency — don't invent an FX rate, present them
-side by side.
+Map the task to the Cowork ROI categories and **sum the Typical minutes saved**
+for the categories it touches (a multi-part task touches several). **The category
+table, the value formula, and the default `HOURLY_RATE` (€75/hr) are in
+`value-and-routing.md` §1.** Cost is USD; value is the user's currency; do **not**
+invent an FX rate — present them side by side.
 
-## Step 5 — Sustainability check
+## Step 5 — Sustainability check (recommendations + a leaner prompt)
 
 Decide whether the **same outcome** could be reached for fewer credits. Only raise
-levers that genuinely apply:
+levers that genuinely apply — never pad. Common, concrete levers:
 
-- **Model right-sizing** — routine task on a heavy model? Suggest Sonnet 4.6 / an
-  efficiency model. Genuinely hard reasoning? Keep the heavy model.
-- **Lighter attachments** — recommend converting a heavy PDF / image-heavy input
-  to `.md` first.
-- **Tighter scope** — narrow the timeframe, sources, or number of deliverables.
-- **Cheaper route** — single artifact or quick Q&A? Point to Copilot Chat /
-  M365 Copilot (see Step 6).
+- **Model right-sizing.** Routine task (summary, extraction, simple draft) on a
+  heavy model (Opus 4.8 / a premium model)? Recommend Sonnet 4.6 / an efficiency
+  model. Genuinely hard reasoning? Keep the heavy model.
+- **Lighter attachments.** No-image PDF / scanned doc attached? Recommend
+  converting to `.md` first (multiples cheaper). Flag image-heavy or `.pptx`
+  inputs as the cost driver.
+- **Tighter scope.** Broad prompt ("analyze everything")? Suggest narrowing the
+  timeframe, source set, or number of deliverables.
+- **Cheaper route.** Single artifact or quick Q&A? Point to Copilot Chat / M365
+  Copilot (no metered credits — see Step 6).
 
-If at least one lever applies, prepare a **sustainable rewrite** of the prompt to
-offer in Step 8. If nothing meaningful applies, say it already runs efficiently.
+If at least one lever applies, prepare a **sustainable rewrite** of the user's
+prompt (same goal, leaner execution) to offer in Step 8. If nothing meaningful
+applies, say the task is already running efficiently and skip the recommendations.
 
 ## Step 6 — Verdict & whether to suggest an alternative
 
-Apply the verdict logic and routing table in `value-and-routing.md` §2–§3:
+Apply the **verdict logic and the which-Copilot-to-use routing table in
+`value-and-routing.md` §2–§3**:
 
-- **Strongly positive — proceed.** Time-value clearly dwarfs credit cost (typical
-  for Medium/Heavy multi-deliverable tasks).
-- **Marginal — offer a lighter tool.** A Light task a per-seat tool does at no
-  metered credit cost. Suggest the alternative but let the user choose.
+- **Strongly positive** — time-value clearly dwarfs credit cost (typical for
+  Medium/Heavy multi-deliverable tasks). Recommend **proceed**.
+- **Marginal** — a Light task a per-seat tool does at **no metered credit cost**.
+  Suggest the alternative (Copilot Chat / M365 Copilot) but let the user choose.
 
-## Step 7 — Render the visual card (inline)
+## Step 7 — Render the visual card (inline, not a file)
 
-Render the estimate as a compact card **inline in the conversation** (never write
-it to a file). Fill the skeleton in `card-template.md`. Include, in order:
+Render the estimate as an **Adaptive Card in the conversation** via the
+`render-ui` skill (invoke `render-ui`, then `render_ui`). Never write it to a
+file. Keep it compact and professional. Include, in this order:
 
-1. **Title** — "Cowork task pre-check".
-2. A **badge** for the class: Light / Medium / Heavy.
-3. A **fact list**: Model, Estimated cost (adjusted band), Attachments,
-   Estimated time saved, Estimated value (state the hourly rate), Verdict.
-4. **Recommendations** (only if Step 5 found levers) — a short list.
-5. A short, subtle **disclaimer** — use this exact wording:
+1. **Title** — "Cowork task pre-check"
+2. A **Badge** for the class: `Light` / `Medium` / `Heavy`.
+3. A **FactSet**: `Model`, `Estimated cost` (adjusted band), `Attachments`,
+   `Estimated time saved`, `Estimated value` (state the hourly rate), `Verdict`.
+4. **Recommendations** (only if Step 5 found levers) — a short `TextBlock` list,
+   e.g. "Switch to Sonnet 4.6 · Convert the PDF to .md · Narrow to last 30 days".
+5. A short **disclaimer** TextBlock (small, `isSubtle: true`, `wrap: true`) — use
+   this exact concise wording:
 
    > *Estimate only — not the metered bill. It factors the model, context,
    > runtime, tools and attachments, but the real cost depends on what actually
-   > runs and is shown by /cost and the Cost Management dashboard after the task.
-   > This pre-check is advisory, not a spending limit, and uses research-based
-   > pricing and time-savings bands (directional, not a guarantee). Running this
-   > check itself uses a small amount of credits.*
+   > runs and is shown by `/cost` and the Cost Management dashboard after the
+   > task. This pre-check is advisory, not a spending limit, and uses
+   > research-based pricing and time-savings bands (directional, not a
+   > guarantee). Running this check itself uses a small amount of credits.*
+
+A **ready-to-fill JSON skeleton** lives in **`card-template.md`** (this folder) —
+Read it at this step, fill in the values, keep colours subtle and on-brand, and
+drop the "Run it leaner" block when Step 5 found no levers.
 
 ## Step 8 — Ask how to proceed
 
-Immediately after the card, ask one question so the user decides after reading the
-numbers. Tailor the options to what applies:
+Immediately after the card, use **AskUserQuestion** (one question) so the user
+decides after reading the numbers. Tailor the options to what applies:
 
-- **"Proceed in Cowork"** — run the task as written (recommend for Medium/Heavy).
-  Offer a **suggested optimized Cowork prompt** alongside this.
-- **"Use Cowork — sustainably"** — *offer whenever Step 5 found a lever.* Apply
-  the sustainable rewrite (switch the model where supported, convert heavy
-  attachments to `.md`, tighten scope), briefly list the adjustments, then run.
-- **"Use Copilot Chat / M365 Copilot instead"** — *offer for marginal/Light
-  tasks.* Read `value-and-routing.md` §4, pick the matching recipe, and walk the
-  user through the concrete steps for that tool. Provide a **suggested Copilot
-  prompt**. Then stop — don't run it in Cowork.
+- **Question:** "How would you like to proceed?"
+- **Options:**
+  - **"Proceed in Cowork"** — run the task as written (recommend for Medium/Heavy).
+  - **"Use Cowork — sustainably"** — *offer this whenever Step 5 found at least one
+    lever.* On selection: apply the **sustainable rewrite** from Step 5 (switch the
+    model where supported, convert heavy attachments to `.md`, tighten scope),
+    briefly list the adjustments made, then run the task with the leaner setup.
+  - **"Use Copilot Chat / M365 Copilot instead"** — *offer for marginal/Light
+    tasks.* On selection: **Read `value-and-routing.md` §4, pick the recipe that
+    matches the task, and walk the user through the concrete step-by-step** for
+    that tool (which app, which button, what to type). Then stop — don't run it in
+    Cowork.
 
-If the user cancels, acknowledge and wait. Never block the task behind more than
-these questions.
+**Conditional follow-up:** If the user picks plain **"Proceed in Cowork"** *and* a
+sustainable rewrite is available, ask one more short question before starting:
+"Want me to convert your prompt into a more sustainable one to save resources?"
+— Yes → apply the rewrite and proceed; No → proceed exactly as written.
+
+If they cancel (empty answer) → acknowledge and wait. Never block the task behind
+more than these questions.
 
 ## Guardrails
 
-- **Run once per task, at the start.** Never re-run on follow-ups.
-- **Only cheap, local lookups for the estimate.** Detect the active model, list
-  attachments, and read the companion files. No search/email/calendar/web/file
-  tools.
-- **Never present the estimate as the real bill.** Always show the disclaimer.
+- **Run once per task, at the start.** Never re-run on follow-ups or refinements
+  within the same task.
+- **Only cheap, local lookups for the estimate** — detect the active model, list
+  attachments (`Glob`), and Read the companion files in this folder. Do
+  **not** call search, email, calendar, web, or file-content tools. Stay fast.
+- **Never present the estimate as the real bill.** Always show the disclaimer. The
+  authoritative figures are `/cost` and the Cost Management dashboard, which the
+  user runs **after** the task completes.
 - **Quote ranges, not false precision.** Cost is a band read from the effective
-  class and scaled only by the model multiplier (heavy inputs / expensive tools
-  move the class up one level — they are not extra multipliers); value uses a
-  stated, user-editable hourly rate.
-- **Recommend sustainability only when it genuinely helps.** Don't invent levers.
-- **Advisory, not enforcement.** Only admin spending limits cap spend.
-- **Card is inline only** — never written to a file.
-- **No fabrication.** Use only the bands, multipliers, weights, time-savings and
-  routing in the companion files, plus the signals you can actually observe. If
-  the task doesn't map cleanly, say it's a rough estimate rather than guessing.
+  class and scaled only by the model multiplier (heavy inputs / expensive tools move
+  the class up one level — they are not extra multipliers); value uses a stated,
+  user-editable hourly rate.
+- **Recommend sustainability only when it genuinely helps.** Don't invent levers;
+  if the task already runs efficiently, say so and skip the recommendations.
+- **Advisory, not enforcement.** This does not block spend — only admin spending
+  limits/alerts do that.
+- **Card is inline only** — render via the `render-ui` skill; never write it to
+  `output/`.
+- **No fabrication.** Use only the credit bands, model multipliers, attachment
+  weights, time-savings bands, and routing in `pricing-reference.md` and
+  `value-and-routing.md`, plus the signals you can actually observe (model,
+  attachments, prompt). Do not invent credit figures, dollar amounts, savings
+  numbers, an FX rate, or a model that isn't in use. If the task doesn't map
+  cleanly to a class or category, say it's a rough estimate rather than guessing.

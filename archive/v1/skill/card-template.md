@@ -6,12 +6,12 @@
 > levers.** Render it inline via the `render-ui` skill — never write it to a file.
 > Keep the disclaimer wording exactly as below.
 >
-> **Badge and cost must agree.** The `Estimated cost` band is the §6 band for the
-> **effective class** (the badge). A heavy input (`.pptx`, scanned PDF, images) or an
-> expensive tool bumps the class up one level in Step 3 *before* you read the band —
-> so e.g. a Medium task with a `.pptx` shows **HEAVY · ≈ 700–1400 credits · ≈ $7–14**,
-> not a Medium band multiplied by a weight. The example below is a plain Medium task
-> (text PDF, no bump).
+> **Badge and cost must agree.** The Estimated cost band is the §6 band for the
+> effective class (the badge). A heavy input (`.pptx`, scanned PDF, images) or an
+> expensive tool bumps the class up one level in Step 3 before you read the band
+> — so e.g. a Medium task with a `.pptx` shows **HEAVY · ≈ 700–1400 credits ·
+> ≈ $7–14**, not a Medium band multiplied by a weight. The example below is a
+> plain Medium task (text PDF, no bump).
 
 ```json
 {
