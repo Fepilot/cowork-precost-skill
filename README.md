@@ -1,5 +1,7 @@
 # Cowork Pre-cost Skill
 
+**Jump to:** [What it does](#what-it-does) · [How to install it](#how-to-install-or-use) · [Where the numbers come from](#where-the-numbers-come-from) · [Limitations](#limitations) · [Disclaimer](#disclaimer) · [Contributing](#contributing) · [License](#license)
+
 <p align="center">
   <img src="screenshots/precost-carousel.gif" alt="Pre-cost in action — the pre-check card, the verdict, and the how-to-run options" width="820">
 </p>
@@ -21,24 +23,6 @@ estimated business value, and a clear recommendation.
 >
 > This repository exists for **learning, experimentation and demonstration**
 > purposes only.
-
----
-
-## Contents
-
-- [What it does](#what-it-does)
-- [Why this exists](#why-this-exists)
-- [How it works](#how-it-works)
-- [Example output](#example-output)
-- [When to use Cowork](#when-to-use-cowork)
-- [When to use Microsoft 365 Copilot instead](#when-to-use-microsoft-365-copilot-instead)
-- [How to install or use](#how-to-install-or-use)
-- [Screenshots](#screenshots)
-- [Where the numbers come from](#where-the-numbers-come-from)
-- [Limitations](#limitations)
-- [Disclaimer](#disclaimer)
-- [Contributing](#contributing)
-- [License](#license)
 
 ---
 
