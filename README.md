@@ -24,6 +24,24 @@ estimated business value, and a clear recommendation.
 
 ---
 
+## Contents
+
+- [What it does](#what-it-does)
+- [Why this exists](#why-this-exists)
+- [How it works](#how-it-works)
+- [Example output](#example-output)
+- [When to use Cowork](#when-to-use-cowork)
+- [When to use Microsoft 365 Copilot instead](#when-to-use-microsoft-365-copilot-instead)
+- [How to install or use](#how-to-install-or-use)
+- [Screenshots](#screenshots)
+- [Where the numbers come from](#where-the-numbers-come-from)
+- [Limitations](#limitations)
+- [Disclaimer](#disclaimer)
+- [Contributing](#contributing)
+- [License](#license)
+
+---
+
 ## What it does
 
 Cowork tasks are billed by usage in **Copilot Credits**. Credits are valuable,
