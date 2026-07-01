@@ -83,8 +83,10 @@ at:
 - **Expected value / time saved** — how long the same work would take by hand.
 
 From those signals it classifies the task as **Light / Medium / Heavy**, applies
-a model multiplier and attachment weight, and produces a credit + dollar band,
-a time-saved estimate, a value estimate, and a verdict.
+the model multiplier, and bumps the task up one class when a heavy input (slides,
+image-heavy or scanned PDFs, several images) or an expensive tool (image
+generation, deep research, browser automation) is involved — then produces a
+credit + dollar band, a time-saved estimate, a value estimate, and a verdict.
 
 All of the pricing and value logic lives in transparent reference files so you
 can see (and adjust) every number it uses:
@@ -202,17 +204,18 @@ screenshots below. Here they are individually:
 
 ![How to run](screenshots/how-to-run.png)
 
-> Two more placeholders are referenced for you to add later — a built-in `/cost`
-> example and a decision-flow diagram. Drop PNGs at
-> `screenshots/cost-skill-example.png` and `screenshots/decision-flow.png` and
-> they'll appear automatically:
->
-> ![Built-in cost skill example](screenshots/cost-skill-example.png)
->
-> ![Decision flow](screenshots/decision-flow.png)
-
 See [`docs/screenshots.md`](docs/screenshots.md) for how to place and reference
 images.
+
+---
+
+## Where the numbers come from
+
+The Light / Medium / Heavy credit bands track Microsoft's own published task
+tiers, and the $0.01-per-credit figure is Microsoft's pay-as-you-go rate.
+Pre-cost then applies the model multiplier and, for heavy inputs or expensive
+tools, a one-level class bump. The authoritative figures are always the built-in
+`/cost` command and the Cost Management dashboard after a task completes.
 
 ---
 

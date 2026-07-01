@@ -5,6 +5,13 @@
 > on-brand. **Drop the "Run it leaner" Recommendations block when Step 5 found no
 > levers.** Render it inline via the `render-ui` skill — never write it to a file.
 > Keep the disclaimer wording exactly as below.
+>
+> **Badge and cost must agree.** The Estimated cost band is the §6 band for the
+> effective class (the badge). A heavy input (`.pptx`, scanned PDF, images) or an
+> expensive tool bumps the class up one level in Step 3 before you read the band
+> — so e.g. a Medium task with a `.pptx` shows **HEAVY · ≈ 700–1400 credits ·
+> ≈ $7–14**, not a Medium band multiplied by a weight. The example below is a
+> plain Medium task (text PDF, no bump).
 
 ```json
 {
@@ -16,7 +23,7 @@
     { "type": "FactSet", "facts": [
       { "title": "Model", "value": "Opus 4.8 (default · 1.0×)" },
       { "title": "Estimated cost", "value": "≈ 300–700 credits · ≈ $3–7" },
-      { "title": "Attachments", "value": "1 PDF (~2–3× weight)" },
+      { "title": "Attachments", "value": "1 PDF (text — no class bump)" },
       { "title": "Estimated time saved", "value": "≈ 90 min" },
       { "title": "Estimated value", "value": "≈ €110 (at €75/hr)" },
       { "title": "Verdict", "value": "Strongly positive — proceed" }

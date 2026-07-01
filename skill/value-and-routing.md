@@ -54,6 +54,11 @@ value           = time_saved_hours × HOURLY_RATE
 - **Marginal — offer a lighter tool.** A **Light** task whose single output a
   per-seat tool (Copilot Chat / M365 Copilot) produces at **no metered credit
   cost**. Surface the alternative but let the user choose.
+- **Heavy / broad — consider splitting.** A single request that spans many
+  sources or deliverables and lands at the top of the **Heavy** band. Still worth
+  running in Cowork, but suggest **splitting it into scoped sub-tasks** (or
+  narrowing the scope) so each run is cheaper, easier to review, and less likely
+  to burn credits on a wrong turn.
 
 ---
 

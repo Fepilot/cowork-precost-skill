@@ -99,15 +99,30 @@ credit band (`pricing-reference.md` §6). Pick the class by the **heaviest signa
 present** — one short summary = Light; a multi-source briefing + Excel + deck =
 Medium; a 6-month analysis + leadership report = Heavy.
 
-## Step 3 — Adjust the estimate
+## Step 3 — Adjust the estimate (model + one class bump)
 
-Start from the base band, then nudge it with the Step 1 signals using the formula
-in `pricing-reference.md` §7:
+Start from the base band, then adjust it with only **two** levers, using the
+formula in `pricing-reference.md` §7:
 
 ```
-adjusted_credits ≈ base_credits × model_multiplier × attachment_weight × context/tool load
+effective_class  = base_class, bumped up one level for a heavy input / expensive tool
+adjusted_credits ≈ base_band(effective_class) × model_multiplier
 adjusted_cost_usd ≈ adjusted_credits × $0.01
 ```
+
+1. **One-level class bump.** Move the base class **up one level** for a **heavy
+   input** (`.pptx`, scanned/image PDFs, several images — the ≥ ~2× rows in §5)
+   **or an expensive tool** (image generation, deep research, browser
+   automation, subagents). Move it **down one level** only for a single trivial
+   light read. Read the band from §6 for this *effective* class.
+2. **Model multiplier.** Scale that band by the active model's multiplier,
+   anchored to Opus 4.8 = 1.0× (Sonnet 0.6× eases it down; a 2.0× premium model
+   pushes it up).
+
+**Do not also multiply by attachment weight or a context/tool factor** — the
+attachment weight only decides whether to trigger the class bump; multiplying by
+it as well would double-count the same signal (the old formula's bug) and detach
+the number from the badge.
 
 Keep the result a **band**, never false-precise — e.g.
 "≈ 200–450 credits · ≈ $2–4.50 (Sonnet 4.6)".
@@ -189,7 +204,10 @@ these questions.
   attachments, and read the companion files. No search/email/calendar/web/file
   tools.
 - **Never present the estimate as the real bill.** Always show the disclaimer.
-- **Quote ranges, not false precision.**
+- **Quote ranges, not false precision.** Cost is a band read from the effective
+  class and scaled only by the model multiplier (heavy inputs / expensive tools
+  move the class up one level — they are not extra multipliers); value uses a
+  stated, user-editable hourly rate.
 - **Recommend sustainability only when it genuinely helps.** Don't invent levers.
 - **Advisory, not enforcement.** Only admin spending limits cap spend.
 - **Card is inline only** — never written to a file.
