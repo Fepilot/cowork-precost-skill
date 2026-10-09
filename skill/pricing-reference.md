@@ -95,23 +95,56 @@ Officially confirmed Cowork models today: **Claude Opus 4.8** (deep reasoning,
 the Cowork default), **Claude Sonnet 4.6** (balanced), and **Cowork 1** (a new
 efficiency-optimized model). Other models may appear in the picker over time.
 
-The multipliers below are a **directional planning device for this pre-check**
-(anchored to each tier's relative compute cost — heavier reasoning models cost
-more per token). They are **not an official Microsoft per-model price list**.
-Multipliers are expressed **relative to the Cowork default, Opus 4.8 = 1.0×**.
+**Officially listed Cowork models (Microsoft Learn, "Choose a model for Copilot
+Cowork", updated 2026-09-14):** Auto (default) · **GPT 5.5** (Frontier, medium
+effort) · **GPT 5.6 Sol** (hard work) · **GPT 5.6 Terra** (balanced, common tasks) ·
+**GPT 6 Astra** (latest, tough problems) · **Claude Opus 5** (complex, high-stakes) ·
+**Claude Sonnet 5** (everyday, fast) · **Claude Fable 5.1** (most advanced, ambitious
+work).
 
-| Model | Tier | Credit multiplier (vs Opus 4.8) | Use it for |
-|-------|------|---------------------------------|------------|
-| **Cowork 1** | Efficiency | **~0.2×** | Fast, simple, high-volume work (cheapest) |
-| **Claude Haiku 4.5** | Efficiency | **~0.2×** | Quick summaries / extraction / simple drafts |
-| **Claude Sonnet 4.6** | Balanced | **~0.6×** | The balanced default for most tasks |
-| **GPT-5.X** | Balanced | **~0.6×** | ≈ Sonnet-tier general work |
-| **Sonnet + Opus advisor** | Mixed | **~0.7–0.8×** | Sonnet does the work, Opus reviews |
-| **Claude Opus 4.8** | Deep reasoning | **1.0× (baseline)** | Hard reasoning, long agentic runs (Cowork default) |
-| **Top-tier reasoning model** | Premium | **~2.0×** | Reserve for the hardest work only |
+Changes since the last refresh (Learn "What's new in Copilot Cowork"):
+- **Sonnet 5 replaced Sonnet 4.6** at GA (June 2026).
+- **Fable 5.1 replaced Fable 5** (Sept 2026); **GPT 6 Astra** added (Sept 2026).
+- **Opus 4.8** shipped at GA but is **no longer in the current model list** (Opus 5
+  is). It stays the **cost baseline** here because §6 bands are anchored to it, and
+  Opus 5 has the same per-token price.
+- **Cowork 1** (cost-optimized model) was announced as "upcoming / rolling out" but
+  is **not in the official model list yet** — treat as unconfirmed.
+- The **Sonnet + Opus advisor** mode and **Haiku** are **not in the current list**.
+- **New cost lever — reasoning effort:** Light / Medium (default) / High / Extra
+  High / Max. Microsoft states higher effort "is slower and uses more credits."
 
-> If the active model can't be determined, assume the **Cowork default (Opus 4.8,
-> 1.0×)** and say so on the card.
+The multipliers below are a **directional planning device for this pre-check**,
+derived from each model's **public per-token list price** (GitHub Copilot model
+pricing, input/output per 1M tokens) relative to Opus 4.8 ($5 / $25). They are
+**not an official Microsoft per-model Cowork price list** — Cowork credits also
+depend on context, tools, runtime and orchestration. Multipliers are expressed
+**relative to Opus 4.8 = 1.0×**.
+
+| Model | Tier | Public token price (in / out per 1M) | Credit multiplier (vs Opus 4.8) | Use it for |
+|-------|------|--------------------------------------|---------------------------------|------------|
+| **Auto** | Router | varies | **~0.7×** (observed) | Default; skews to cheaper models for routine work |
+| **Claude Sonnet 5** | Efficient | $2 / $10 | **~0.4×** | Everyday drafting, lookups, summaries (cheapest listed) |
+| **GPT 5.6 Terra** | Balanced | $2 / $12 | **~0.4–0.5×** | Common tasks, balanced effort |
+| **GPT 5.6 Sol** | Powerful | $4 / $20 | **~0.8×** | Hard work, efficient for its class |
+| **Claude Opus 4.8** | Deep reasoning | $5 / $25 | **1.0× (baseline)** | Baseline for §6 bands |
+| **Claude Opus 5** | Deep reasoning | $5 / $25 | **~1.0×** | Complex, high-stakes work |
+| **GPT 5.5** (Frontier) | Powerful | $5 / $30 | **~1.0–1.2×** list; **up to ~4× observed** | Medium-effort work; avoid for deck building (see note) |
+| **Claude Fable 5.1** | Premium | $10 / $50 | **~2.0×** | Most ambitious work only; admin-enabled, data retention applies |
+| **GPT 6 Astra** | Premium | $10 / $50 | **~2.0×** | Toughest problems only |
+| **Cowork 1** *(unconfirmed)* | Efficiency | n/a | **~0.2× (assumption)** | Only if it appears in the picker |
+
+**Field evidence (independent, same prompt — a PowerPoint deck):** Opus 4.8 ≈ 326
+credits, Auto ≈ 228 credits (~0.7×), GPT 5.5 ≈ 1,291 credits (~4× — long runtime),
+Sonnet 5 lowest of all (reported as probably under-metered). Runtime and tool loops
+can outweigh token price, so treat list-price ratios as a floor for slow models.
+
+**Reasoning effort adjustment (assumption, no official ratio):** Light ≈ −20–30%,
+Medium = as above, High / Extra High ≈ +25–50%, Max ≈ up to 2×. State it on the
+card as an assumption.
+
+> If the active model can't be determined, assume **Auto ≈ 0.7×** for routine tasks
+> or **Opus-class 1.0×** for deep-reasoning tasks, and say so on the card.
 
 ---
 
@@ -126,20 +159,25 @@ class** in §7 (rule of thumb: **≥ ~2× is a heavy input** — `.pptx`, scanne
 several images). They are a **guide for the class bump, not a literal multiplier** on
 the base band (see §7 for why).
 
-| Attachment | Relative token/credit weight |
-|------------|------------------------------|
-| `.md` / `.txt` / `.csv` | **1× (lightest)** |
-| `.docx` | ~1.2× |
-| `.xlsx` (data) | ~1.3× |
-| `.html` | ~1.7× |
-| `.pdf` (text, no images) | ~2–3× |
-| `.pptx` | ~3–4× (slides parsed as text + visuals) |
-| images (`.png` / `.jpg`) | high — each image ≈ a block of vision tokens; many images → Heavy |
-| scanned / photographed PDF | ~3–5× (heaviest) |
+| Attachment | Relative token/credit weight | Note |
+|------------|------------------------------|------|
+| `.md` / `.txt` / `.csv` | **1× (lightest)** | Near the token floor; structure parses natively |
+| `.docx` | ~1.2× | Unchanged (no new public data) |
+| `.xlsx` (data) | ~1.3× | Unchanged (no new public data) |
+| `.html` | ~1.7× | Raw HTML carries markup noise |
+| `.pdf` — born-digital, clean text | **~1.1×** | Clean extraction is roughly a wash vs `.md` |
+| `.pdf` — text, noisy layout (headers/footers, multi-column) | **~2–3×** | Extraction noise; up to ~70% savings when converted |
+| `.pdf` — read as page images | **~3–5×+** | Some pipelines bill page image **and** extracted text |
+| `.pptx` | ~3–4× | Slides parsed as text + visuals (no new public data) |
+| images (`.png` / `.jpg`) | **≈1,000–1,400 tokens per ~1024×1024 image**; large photos ≈2,500–6,600 | Several images → Heavy |
+| scanned / photographed PDF | **~5×** (heaviest) | ~765 tokens/page as pixels; 10-page scan ≈7,600 vs ≈1,500 as text |
 
-*Rule of thumb:* a text PDF carries roughly **48–70%+ more tokens** than the same
-content in `.md`; scanned/image-heavy files are worse. Converting a heavy input to
-`.md` first is the single biggest sustainability lever.
+*Rule of thumb (revised):* the old "PDF = 48–70%+ more tokens" figure only holds for
+**noisy extraction or page-image paths**. A clean, born-digital PDF is close to `.md`
+(~5% difference in one measurement), so converting it is about **structure and
+accuracy**, not tokens. The big savings are on **scanned / image-heavy files and
+multi-image inputs** — converting those to `.md` first remains the single biggest
+sustainability lever.
 
 ---
 
@@ -212,8 +250,23 @@ Only **two** things scale the base band, so the estimate stays reproducible and 
 - **Copilot Cowork GA — cost model, budgeting & model choice** (press coverage of
   Microsoft's announcement) —
   https://www.heise.de/en/news/From-Chat-to-Agent-Copilot-Cowork-for-Microsoft-365-is-here-11335714.html
+- **Choose a model for Copilot Cowork** (current model list, reasoning effort) —
+  https://learn.microsoft.com/en-us/microsoft-365/copilot/cowork/cowork-models
+- **What's new in Copilot Cowork** (model replacements Jun–Sep 2026) —
+  https://learn.microsoft.com/en-us/microsoft-365/copilot/cowork/whats-new
+- **Public per-token model prices** (basis for §4 ratios) —
+  https://docs.github.com/en/copilot/reference/copilot-billing/models-and-pricing
+- **Same prompt, different models — Cowork cost comparison** (field evidence) —
+  https://futurework.blog/2026/07/01/same-prompt-different-models-cowork-model-outcome-and-cost-comparison/
+- **Attachment token data** (§5) —
+  https://markdownconverters.com/blog/pdf-vs-markdown-ai-tokens ·
+  https://mdisbetter.com/blog/token-count-pdf-vs-markdown-real-comparison ·
+  https://www.miinideck.com/blog/how-many-tokens-image-pdf-llm-2026
 - Authoritative rates: **Copilot Credit Guide** + **Cost Management dashboard /
   `/cost`** (per-tenant, real billed figures).
+
+*Last refreshed from sources: 2026-10-09 (§4–§5); other sections 2026-06-30. Re-verify against the pages above if
+Microsoft updates pricing.*
 
 *Last refreshed from sources: 2026-06-30. Re-verify against the pages above if
 Microsoft updates pricing.*
