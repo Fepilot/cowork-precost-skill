@@ -1,48 +1,42 @@
 # Screenshots
 
-Where to put images and how to reference them in the README.
+> **Pre-cost is not an official Microsoft skill or feature. It is a community
+> example — use it as inspiration and adapt it to your own business needs.**
 
-## Where they live
+All images live in [`../screenshots/`](../screenshots/). Reference them from
+the README with relative paths (`screenshots/<file>.png`) so they render on
+GitHub.
 
-All images go in the [`../screenshots/`](../screenshots/) folder at the repo root.
-Reference them from the README with **relative paths** so they render correctly on
-GitHub:
+## v3 (current)
 
-```markdown
-![Built-in cost skill example](screenshots/cost-skill-example.png)
-
-![Pre-cost skill example](screenshots/precost-skill-example.png)
-
-![Decision flow](screenshots/decision-flow.png)
-```
-
-## Expected files
-
-| File | What it should show | Status |
+| File | What it shows | Used in |
 |---|---|---|
-| `screenshots/precost-carousel.gif` | Animated preview cycling the 3 real screenshots (shown at the top of the README) | ✅ Included |
-| `screenshots/cost-skill-example.png` | The built-in `/cost` command output after a task | Placeholder — add your own |
-| `screenshots/precost-skill-example.png` | A Pre-cost pre-check card with the "how to run" options | ✅ Included |
-| `screenshots/decision-flow.png` | A simple Cowork-vs-lighter-tool decision diagram | Placeholder — add your own |
-| `screenshots/precost-marginal-example.png` | A *Marginal* verdict on a simple email task | ✅ Included |
-| `screenshots/how-to-run.png` | Adding `/precost` to a task to trigger the skill | ✅ Included |
+| [`precost-v3-card-heavy-deck.png`](../screenshots/precost-v3-card-heavy-deck.png) | The v3 card for a Heavy task (business idea → researched 10–12 slide deck): verdict "use M365 Copilot instead", ≈ 700–1,500 credits, ≈ $7–15, time saved, comparison chart, recommended model + effort | README — *What you get* |
+| [`precost-v3-check-cost-56-credits.png`](../screenshots/precost-v3-check-cost-56-credits.png) | Cowork's `/cost` result after a full Pre-cost check: 56 credits used, 93% of the monthly limit remaining | README — *The check itself costs a little* |
 
-To regenerate the animated carousel after changing the screenshots, rebuild
-`precost-carousel.gif` from the three PNGs (any image tool or a short Pillow
-script works) and keep it ~800px wide so it stays light.
+![Pre-cost v3 card for a Heavy pitch-deck task with verdict, credit and USD tiles, time saved and a comparison chart](../screenshots/precost-v3-card-heavy-deck.png)
 
-The placeholders are referenced in the README already — once you drop the real
-PNGs in with those exact names, the images appear automatically. No README edits
-needed.
+![Cowork /cost result: 56 credits used for the Pre-cost check, 93% of the monthly limit remaining](../screenshots/precost-v3-check-cost-56-credits.png)
+
+## v2 (archived)
+
+These show the v2 card and are kept for reference in
+[`archive/v2/`](../archive/v2/README.md). They are not accurate for v3.
+
+| File | What it shows |
+|---|---|
+| [`precost-skill-example.png`](../screenshots/precost-skill-example.png) | A v2 card with the "how to run" options |
+| [`precost-marginal-example.png`](../screenshots/precost-marginal-example.png) | A v2 *Marginal* verdict on a simple email task |
+| [`how-to-run.png`](../screenshots/how-to-run.png) | Adding `/precost` to a task to trigger the skill |
+| [`precost-carousel.gif`](../screenshots/precost-carousel.gif) | Animated preview cycling the three v2 screenshots |
 
 ## Tips for good screenshots
 
 - **Crop tight** to the relevant card or message.
-- **Redact anything private** — names, email addresses, internal links, customer
-  data. Blur or box it out before committing.
-- Prefer **PNG** for crisp UI text.
-- Keep file sizes reasonable (a few hundred KB is plenty for a UI capture).
-- Use light mode for consistency, or note the theme in the caption.
+- **Redact anything private** — names, email addresses, internal links, tenant
+  names, customer data.
+- Prefer **PNG** for crisp UI text and keep files to a few hundred KB.
+- Write **meaningful alt text** that says what the image shows.
 
 ## Safety reminder
 

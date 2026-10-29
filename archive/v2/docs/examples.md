@@ -1,5 +1,7 @@
 # Examples
 
+> **Archived — v2.** Kept for reference only. For the current version see the [repository README](../../../README.md) and [docs/how-it-works.md](../../../docs/how-it-works.md).
+
 Three worked examples showing how Pre-cost routes different tasks. Figures are
 illustrative estimates (bands, not bills) using the default €75/hr value rate.
 
