@@ -1,257 +1,189 @@
-# Cowork Pre-cost Skill
+# Pre-cost — know what a Cowork task will cost *before* you run it
 
-**Jump to:** [What it does](#what-it-does) · [How to install it](#how-to-install-or-use) · [Where the numbers come from](#where-the-numbers-come-from) · [Limitations](#limitations) · [Disclaimer](#disclaimer) · [Contributing](#contributing) · [License](#license)
+![version v3](https://img.shields.io/badge/version-v3-2f5fa6)
+![license MIT](https://img.shields.io/badge/license-MIT-4e8f49)
+![status: community / unofficial](https://img.shields.io/badge/status-community%20%2F%20unofficial-f6c343)
 
-<p align="center">
-  <img src="screenshots/precost-carousel.gif" alt="Pre-cost in action — the pre-check card, the verdict, and the how-to-run options" width="820">
-</p>
-
-A custom **Copilot Cowork** skill that estimates what a task will likely **cost
-and return _before_ you run it** — so you can decide whether to proceed in Cowork,
-run it in a leaner way, or use Microsoft 365 Copilot / Copilot Chat instead.
-
-Type `/precost` before a task and you get a quick, visual pre-check: a Light /
-Medium / Heavy rating, an estimated credit + dollar range, estimated time saved,
-estimated business value, and a clear recommendation.
+**Jump to:** [What you get](#what-you-get) · [How it works](#how-it-works) · [Install](#install-in-2-minutes) · [What's new in v3](#whats-new-in-v3) · [Where the numbers come from](#where-the-numbers-come-from) · [Make it yours](#make-it-yours) · [Limitations](#limitations) · [Contributing](#contributing) · [License](#license)
 
 > [!IMPORTANT]
-> **Pre-cost is not an official Microsoft skill or a productized Microsoft
-> feature.** It is an incubation skill I created — similar to something any user
-> could build and adapt for their own workflow. All outputs are **estimates
-> only**. The real cost always depends on the prompt, context, documents, tools
-> used, model behavior, runtime and final execution.
+> **Pre-cost is not an official Microsoft skill or feature. It is a community
+> example — use it as inspiration and adapt it to your own business needs.**
 >
-> This repository exists for **learning, experimentation and demonstration**
-> purposes only.
+> All outputs are estimates, not bills. The real cost depends on the prompt,
+> context, documents, tools, model, reasoning effort and runtime — check it
+> afterwards with Cowork's free `/cost` command.
+
+Pre-cost is a Copilot Cowork skill. Add `/precost` to a task and it estimates
+the credits, cost and value *before* anything runs — then suggests the cheapest
+good route: Cowork, Cowork lean, or Microsoft 365 Copilot.
 
 ---
 
-## What it does
+## What you get
 
-Cowork tasks are billed by usage in **Copilot Credits**. Credits are valuable,
-and once a task runs they're spent. Cowork already ships with a built-in
-**`/cost`** command that tells you how many credits a task used — but only
-*after* it has finished.
+<p align="center">
+  <img src="screenshots/precost-v3-card-heavy-deck.png" alt="Pre-cost v3 card for a business idea turned into a researched 10–12 slide pitch deck: Heavy badge, verdict 'use M365 Copilot instead', about 700–1,500 credits, about $7–15, about 84 minutes saved, a bar chart comparing Cowork as written, Cowork lean and the M365 Copilot route, and a recommended model and effort" width="640">
+</p>
 
-**Pre-cost moves the cost conversation earlier.** It looks at the task you're
-about to delegate and gives you a directional estimate up front, plus a
-recommendation:
+One compact card, then one question: how do you want to run it?
 
-- ✅ **Proceed in Cowork** — the task is a good fit and the time saved is worth it.
-- 🌱 **Proceed in Cowork, but leaner** — same outcome, fewer credits (e.g. a
-  lighter model, a converted attachment, tighter scope).
-- 💬 **Use Microsoft 365 Copilot / Copilot Chat instead** — a small task a
-  per-seat tool can do with no metered Cowork credits.
-- ✂️ **Simplify or split the task** — it's too big or broad as written.
-
-The goal is **not** to predict the exact cost perfectly. The goal is to help you
-make a better decision before spending credits.
-
----
-
-## Why this exists
-
-- **Credits are a real budget.** Every Cowork task consumes metered Copilot
-  Credits. Small, casual tasks can quietly add up.
-- **`/cost` is useful but reactive.** It's a receipt. By the time you see it, the
-  credits are already gone.
-- **Pre-cost is a pre-check.** It gives you a heads-up *before* you spend, so the
-  expensive runs are the ones that are actually worth it — and the cheap stuff
-  goes to a tool that doesn't burn credits.
-
-Think of it as a lightweight gate at the start of a task, not a brake on your
-work. It's advisory — it never blocks anything.
-
-> **`/cost` tells you how much a task cost after it has run.**
-> **Pre-cost helps you decide whether it's worth running before you start.**
+1. **Verdict** — ✅ Cowork as written · 🌱 Cowork, run it lean · 💡 Use M365 Copilot instead · ⚠️ Rescope first.
+2. **Class badge** — Light, Medium or Heavy, from Microsoft's published task bands.
+3. **Three tiles** — credits, ≈ USD and time saved, with the lean values underneath.
+4. **Comparison chart** — Cowork as written vs. Cowork lean vs. the Microsoft 365 Copilot route.
+5. **Recommended model + effort and source link** — plus cost drivers, the lean minimum, the share of a monthly limit and a link to the official Copilot Credits Guide.
 
 ---
 
 ## How it works
 
-When you run `/precost`, the skill reads a handful of cheap, local signals — it
-does **not** run searches, open your documents, or do the actual work. It looks
-at:
-
-- **Task complexity** — how many sources, how much reasoning, how many outputs.
-- **Number of expected steps** — a single reply vs. a multi-stage workflow.
-- **Number and size of documents** — and their *format* (a `.md` costs far less
-  than a `.pdf`, image, or `.pptx`).
-- **Need for research** — web/multi-source gathering vs. a self-contained task.
-- **Need for multiple deliverables** — one email vs. a doc + spreadsheet + deck.
-- **Expected tool usage** — cheap single reads vs. image generation, deep
-  research, or browser automation.
-- **Estimated runtime** — seconds vs. several minutes of compute.
-- **Expected value / time saved** — how long the same work would take by hand.
-
-From those signals it classifies the task as **Light / Medium / Heavy**, applies
-the model multiplier, and bumps the task up one class when a heavy input (slides,
-image-heavy or scanned PDFs, several images) or an expensive tool (image
-generation, deep research, browser automation) is involved — then produces a
-credit + dollar band, a time-saved estimate, a value estimate, and a verdict.
-
-All of the pricing and value logic lives in transparent reference files so you
-can see (and adjust) every number it uses:
-
-- [`skill/precost.md`](skill/precost.md) — the main skill instructions.
-- [`skill/pricing-reference.md`](skill/pricing-reference.md) — model
-  multipliers, attachment weights, credit bands and the adjustment formula.
-- [`skill/value-and-routing.md`](skill/value-and-routing.md) — time-saved/value
-  bands, verdict logic, and which-Copilot-to-use routing.
-- [`skill/card-template.md`](skill/card-template.md) — the visual card layout.
-
----
-
-## Example output
-
-```text
-Cowork task pre-check
-
-Task: Weekly highlights deck for 1:1 with manager
-
-Complexity: Medium
-
-Estimated cost:
-300–700 credits / approx. $3–$7
-
-Estimated time saved:
-~108 minutes
-
-Estimated value:
-~€135 at €75/hour
-
-Verdict:
-Strongly positive — proceed in Cowork
-
-Recommendation:
-Proceed in Cowork because this is a multi-source, single-deliverable task that
-would take significantly longer to complete manually.
+```mermaid
+flowchart LR
+  A[Write your task + /precost] --> B{Outcome clear?}
+  B -- no --> C[Up to 3 quick questions]
+  B -- yes --> D[Estimate from official bands]
+  C --> D
+  D --> E[Visual card + verdict + source link]
+  E --> F{Your choice}
+  F --> G[Proceed in Cowork<br/>recommended model & effort]
+  F --> H[Cowork sustainable<br/>lean plan + minimum credits]
+  F --> I[Use Microsoft 365 Copilot<br/>step-by-step flow, no Cowork credits]
 ```
 
-In Cowork itself, the same estimate renders as a compact card inline in the
-conversation, followed by a short "how would you like to proceed?" prompt.
+The skill never starts your task until you choose.
+
+Want the details — the 7 steps, the lookup table and the verdict rules? See
+[`docs/how-it-works.md`](docs/how-it-works.md).
 
 ---
 
-## When to use Cowork
+## The check itself costs a little
 
-Cowork (and its credits) pays off when the task is genuinely **agentic** —
-multi-step, multi-source, or multi-deliverable:
-
-- Multi-step tasks that chain several actions together.
-- Research + synthesis + output in one go.
-- Deck creation from scattered inputs.
-- Weekly summaries pulled from different sources.
-- Tasks involving several files at once.
-- Any work where the time saved clearly justifies the credit usage.
-
-## When to use Microsoft 365 Copilot instead
-
-For small, self-contained work, a per-seat tool does the job with **no metered
-Cowork credits**:
-
-- One quick question.
-- Summarizing a single email.
-- Rewriting a paragraph.
-- Drafting a short reply.
-- Simple brainstorming.
-- Low-value tasks where Cowork would be overkill.
-
-If a per-seat tool can do the job with no metered credits, Pre-cost will gently
-point you there instead.
+> [!NOTE]
+> In our test, a full pre-check (questions + card) used **56 credits (≈ $0.56)** —
+> about 4–8% of the 700–1,500-credit task it evaluated. Your number will vary
+> with model, effort and questions asked. Use `/precost lite` for a text-only
+> summary.
+>
+> <img src="screenshots/precost-v3-check-cost-56-credits.png" alt="Cowork /cost result after a full Pre-cost check: 56 credits used for this task, 93% of the monthly limit remaining" width="560">
 
 ---
 
-## How to install or use
+## Install in 2 minutes
 
-1. **[Download `precost-skill-v2.zip`](precost-skill-v2.zip?raw=1).**
-2. Open a **new chat in Cowork** and **upload the `.zip` file** there.
-3. Ask Cowork to **create the skill** and name its command **`/precost`**.
+1. Download [`precost-skill-v3.zip`](precost-skill-v3.zip?raw=1).
+2. In Cowork: **Customize → Skills → Add → Upload skill** → select the zip
+   (or attach it in a new Cowork chat and ask *"Install this as my skill named
+   precost"*).
+3. Start a new chat, write a task and add `/precost`.
 
-That's it — from then on, just add `/precost` to (or before) any task you're
-unsure about.
+**Skill not in the `/` list?** Open a new chat or reopen Cowork. If you edited
+the description, keep it under 1,024 characters — Cowork ignores longer ones.
 
-> Prefer to browse first? The same files live unzipped under
-> [`skill/`](skill/) — open [`skill/precost.md`](skill/precost.md). The previous
-> release is kept under [`archive/v1/`](archive/v1/).
+Prefer to read first? The same files live unzipped under [`skill/`](skill/) —
+start with [`skill/SKILL.md`](skill/SKILL.md).
+
+| File | What it holds |
+|---|---|
+| [`skill/SKILL.md`](skill/SKILL.md) | The 7-step workflow and guardrails |
+| [`skill/pricing-reference.md`](skill/pricing-reference.md) | Your settings, billing facts, bands, model tiers, effort, lookup tables, sources |
+| [`skill/value-and-routing.md`](skill/value-and-routing.md) | Time saved, verdict rules, routing table, Microsoft 365 Copilot recipes |
+| [`skill/card-template.md`](skill/card-template.md) | The card layout and the lite-mode text summary |
 
 ---
 
-## Screenshots
+## What's new in v3
 
-The animated preview at the top of this README cycles through the three real
-screenshots below. Here they are individually:
+- **Clarify first.** Up to 3 quick questions (outcome, scope, frequency) — only when the answer would change the estimate.
+- **Visual card v3.** Verdict, class badge, three KPI tiles, a comparison chart, recommended model + effort and a link to the official source.
+- **Three-way decision.** Proceed in Cowork · Cowork *sustainable* (lean plan, minimum credits, optional budget) · Microsoft 365 Copilot step by step.
+- **Model tiers, not fixed names.** Efficient / Baseline / Premium / Auto, mapped to today's picker. Auto is the safe default.
+- **Reasoning effort** (Light → Max) is now a cost lever.
+- **Automations.** Scheduled and event-driven tasks show cost per run and per month.
+- **Lite mode.** `/precost lite` returns a 7-line text summary for the cheapest possible check.
+- **Opt-in and never runs your task by itself.** It waits for your choice and a "go". No CO₂ or energy claims.
 
-**Pre-cost pre-check** — the card and the "how to run" options:
-
-![Pre-cost skill example](screenshots/precost-skill-example.png)
-
-**A "Marginal" verdict** — a simple email task a per-seat tool can do for free:
-
-![Pre-cost marginal example](screenshots/precost-marginal-example.png)
-
-**How to run it** — add `/precost` to a task to trigger the skill:
-
-![How to run](screenshots/how-to-run.png)
-
-See [`docs/screenshots.md`](docs/screenshots.md) for how to place and reference
-images.
+Full details in [`CHANGELOG.md`](CHANGELOG.md).
 
 ---
 
 ## Where the numbers come from
 
-The Light / Medium / Heavy credit bands track Microsoft's own published task
-tiers, and the $0.01-per-credit figure is Microsoft's pay-as-you-go rate.
-Pre-cost then applies the model multiplier and, for heavy inputs or expensive
-tools, a one-level class bump. The authoritative figures are always the built-in
-`/cost` command and the Cost Management dashboard after a task completes.
+| What | Value | Type |
+|---|---|---|
+| Light task | 100–300 credits (≈ $1–3) | Official band — Copilot Credits Guide |
+| Medium task | 300–700 credits (≈ $3–7) | Official band — Copilot Credits Guide |
+| Heavy task | > 700 credits (read as 700–1,500, flagged "may exceed") | Official band — Copilot Credits Guide |
+| Credit price | $0.01 per credit, pay-as-you-go | Official |
+| Model tiers | Efficient ×0.6 · Baseline ×1.0 · Premium ×2.0 · Auto ×0.6–1.0 | *Directional assumption* of this community skill — Microsoft does not publish per-model Cowork rates |
+| Time saved | e.g. analysis & research ≈ 60 min, a document ≈ 24 min; valued at €75/h by default | Planning estimate |
+
+The full tables are in [`skill/pricing-reference.md`](skill/pricing-reference.md)
+and [`skill/value-and-routing.md`](skill/value-and-routing.md).
+
+**Official sources**
+
+- [Copilot Credits Guide](https://www.microsoft.com/licensing/guidance/CopilotCreditsGuide)
+- [Usage-based billing & cost management](https://learn.microsoft.com/en-us/microsoft-365/copilot/usage-based-billing-overview-copilot-credits)
+- [Everyday vs. advanced AI (USL vs. UBB)](https://learn.microsoft.com/en-us/microsoft-365/copilot/user-subscription-license-usage-based-billing)
+- [The `/cost` command](https://learn.microsoft.com/en-us/microsoft-365/copilot/usage-based-billing-copilot-credits-cost)
+- [Choose a model for Cowork](https://learn.microsoft.com/en-us/microsoft-365/copilot/cowork/cowork-models)
+- [What's new in Cowork](https://learn.microsoft.com/en-us/microsoft-365/copilot/cowork/whats-new)
+- [Microsoft 365 Copilot plans & pricing](https://www.microsoft.com/en-us/microsoft-365-copilot/pricing)
+
+---
+
+## Make it yours
+
+Pre-cost answers a generic question: *is this task worth running in Cowork, and
+how do I run it with fewer credits?* Your organization probably has a sharper
+one. Change the questions, the numbers and the routes to fit how your business
+works — in plain language inside Cowork, or by forking this repo. The
+[upgrade guide](docs/UPGRADE-IDEAS.md) has ten ideas; two teasers:
+
+**(a) Process-discovery questions for automations.** Ask about the trigger,
+weekly volume, systems involved and human approvals, then show cost per run
+and per month. A task that runs every weekday costs ~22× a one-off.
+
+**(b) ROI questions that can flip the verdict to Cowork.** No Cowork credits
+doesn't always mean cheapest overall — the Microsoft 365 Copilot route can cost
+more of your own time.
+
+| Weekly customer-account review | M365 Copilot route | Cowork (lean) |
+|---|---|---|
+| Your time per run | ≈ 35 min | ≈ 5 min to review |
+| Credits per month (4 runs) | 0 | ≈ 720–1,680 (≈ $7.20–16.80) |
+| Time value of the difference | — | 30 min × 4 runs ≈ **€150 / month** |
+
+For that team, Cowork pays back even though it is metered.
 
 ---
 
 ## Limitations
 
-- **Estimates are directional, not guaranteed.** Pre-cost produces a *band*, not
-  a bill.
-- **It can't know the exact final execution path.** The agent decides what to do
-  at runtime.
-- **Complex prompts change during execution.** What you ask and what actually
-  runs can differ.
-- **Model, tools, documents and runtime all affect the real cost** — and only
-  the actual run knows those.
-- **It should support judgment, not replace it.** Use it as a second opinion,
-  not an oracle.
+- **Estimates are directional.** You get a band, not a bill.
+- **The agent decides at runtime.** What runs can differ from what you asked.
+- **Model availability depends on your tenant.** Admins can turn models on or off.
+- **The budget is a target, not a cap.** Only admin spending limits cap spend.
+- **No CO₂ figures.** "Sustainable" means the same outcome with fewer credits.
 
-The authoritative numbers are always the built-in **`/cost`** command and the
-**Cost Management dashboard** after a task completes.
-
----
-
-## Disclaimer
-
-> **Pre-cost is not an official Microsoft skill or a productized Microsoft
-> feature.** It is an incubation skill I created — similar to something any user
-> could build and adapt for their own workflow. All outputs are **estimates
-> only**. The real cost will always depend on the prompt, context, documents,
-> tools used, model behavior, runtime and final execution.
->
-> Pre-cost is **advisory** — it does not enforce or cap spend. Only the admin
-> spending limits and alerts in the Microsoft 365 admin center do that. This
-> repository is for learning, experimentation and demonstration only.
+The real numbers are always `/cost` (free) and the Cost Management dashboard
+after the task.
 
 ---
 
 ## Contributing
 
-Suggestions are welcome — this is meant to be adapted.
+Issues and pull requests are welcome — better bands, clearer wording, new
+routes. Please **never** include confidential data, internal links, tenant
+names or private screenshots.
 
-- Open an issue or PR with ideas, better bands, or clearer wording.
-- Feel free to fork it and tune the numbers to your own environment.
-- **Please don't submit** confidential information, internal data, screenshots
-  with private content, or proprietary Microsoft material.
+Earlier versions are kept under [`archive/`](archive/) ([v1](archive/v1/),
+[v2](archive/v2/)).
 
 ---
 
 ## License
 
-Released under the [MIT License](LICENSE).
+[MIT](LICENSE).

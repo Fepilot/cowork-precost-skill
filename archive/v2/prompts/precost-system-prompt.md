@@ -1,5 +1,7 @@
 # Pre-cost — System Prompt
 
+> **Archived — v2.** Kept for reference only. For the current version see the [repository README](../../../README.md) and [docs/how-it-works.md](../../../docs/how-it-works.md).
+
 A reusable, copy-paste system / instruction prompt for the **Pre-cost** skill.
 Use this when you want a single self-contained prompt (e.g. in a custom GPT,
 Copilot Studio agent, or a plain chat session) instead of the multi-file skill in

@@ -1,5 +1,7 @@
 # Usage
 
+> **Archived — v2.** Kept for reference only. For the current version see the [repository README](../../../README.md) and [docs/how-it-works.md](../../../docs/how-it-works.md).
+
 How to use **Pre-cost** step by step.
 
 ## 1. Install the skill
