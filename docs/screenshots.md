@@ -1,51 +1,29 @@
 # Screenshots
 
-Where to put images and how to reference them in the README.
+All images live in [`../screenshots/`](../screenshots/). Reference them with
+relative paths so they render on GitHub, and always add meaningful alt text.
 
-## Where they live
+## Current (v3)
 
-All images go in the [`../screenshots/`](../screenshots/) folder at the repo root.
-Reference them from the README with **relative paths** so they render correctly on
-GitHub:
-
-```markdown
-![Built-in cost skill example](screenshots/cost-skill-example.png)
-
-![Pre-cost skill example](screenshots/precost-skill-example.png)
-
-![Decision flow](screenshots/decision-flow.png)
-```
-
-## Expected files
-
-| File | What it should show | Status |
+| File | Caption | Alt text |
 |---|---|---|
-| `screenshots/precost-carousel.gif` | Animated preview cycling the 3 real screenshots (shown at the top of the README) | ✅ Included |
-| `screenshots/cost-skill-example.png` | The built-in `/cost` command output after a task | Placeholder — add your own |
-| `screenshots/precost-skill-example.png` | A Pre-cost pre-check card with the "how to run" options | ✅ Included |
-| `screenshots/decision-flow.png` | A simple Cowork-vs-lighter-tool decision diagram | Placeholder — add your own |
-| `screenshots/precost-marginal-example.png` | A *Marginal* verdict on a simple email task | ✅ Included |
-| `screenshots/how-to-run.png` | Adding `/precost` to a task to trigger the skill | ✅ Included |
+| [`precost-v3-card-heavy-deck.png`](../screenshots/precost-v3-card-heavy-deck.png) | The v3 card for a Heavy task: web research + a 10–12 slide pitch deck. Verdict: use M365 Copilot instead. | Pre-cost v3 card for a Heavy task (web research plus a 10–12 slide pitch deck). Verdict: use M365 Copilot instead (Researcher then PowerPoint agent). Tiles: about 700–1,500 credits, about $7–15, about 84 minutes saved. |
+| [`precost-v3-check-cost-56-credits.png`](../screenshots/precost-v3-check-cost-56-credits.png) | `/cost` after the pre-check: the check itself used 56 credits. | Cowork /cost result after running the pre-check: 56 credits used for this task. |
 
-To regenerate the animated carousel after changing the screenshots, rebuild
-`precost-carousel.gif` from the three PNGs (any image tool or a short Pillow
-script works) and keep it ~800px wide so it stays light.
+## Archived (v2)
 
-The placeholders are referenced in the README already — once you drop the real
-PNGs in with those exact names, the images appear automatically. No README edits
-needed.
+Kept for reference; shown in [`../archive/v2/README.md`](../archive/v2/README.md).
 
-## Tips for good screenshots
+| File | Caption | Alt text |
+|---|---|---|
+| [`precost-skill-example.png`](../screenshots/precost-skill-example.png) | v2 card with the "how to run" options. | Pre-cost v2 card with the how-to-run options |
+| [`precost-marginal-example.png`](../screenshots/precost-marginal-example.png) | v2 "Marginal" verdict on a simple email task. | Pre-cost v2 Marginal verdict on a simple email task |
+| [`how-to-run.png`](../screenshots/how-to-run.png) | Adding `/precost` to a task (v2). | Adding /precost to a task in Cowork (v2) |
+| [`precost-carousel.gif`](../screenshots/precost-carousel.gif) | Animated preview of the three v2 screenshots. | Pre-cost v2 in action — card, verdict and how-to-run options |
 
-- **Crop tight** to the relevant card or message.
-- **Redact anything private** — names, email addresses, internal links, customer
-  data. Blur or box it out before committing.
-- Prefer **PNG** for crisp UI text.
-- Keep file sizes reasonable (a few hundred KB is plenty for a UI capture).
-- Use light mode for consistency, or note the theme in the caption.
+## Tips
 
-## Safety reminder
-
-Do **not** commit screenshots containing confidential information, internal-only
-content, private customer data, or anything that implies this is an official
-Microsoft feature. When in doubt, redact or leave it out.
+- Crop tight to the card or message. Prefer PNG.
+- Redact names, email addresses, internal links, tenant names and customer data.
+- Never commit confidential content or anything that suggests this is an
+  official Microsoft feature.

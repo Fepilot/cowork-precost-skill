@@ -1,9 +1,9 @@
 # Archive — v1
 
-These are the **original (v1)** Pre-cost skill files, superseded by **v2** in the
-repo root (`precost-skill-v2.zip`) and under [`skill/`](../../skill/).
+These are the **original (v1)** Pre-cost skill files, superseded by **v3** at the
+repo root (`precost-skill-v3.zip`, [`skill/`](../../skill/)). v2 is in [`../v2/`](../v2/).
 
-They are kept here for reference only. Do not install these — use the current v2
+They are kept here for reference only. Do not install these — use the current v3
 bundle instead.
 
 - `precost-skill-v1.zip` — the original downloadable bundle.
