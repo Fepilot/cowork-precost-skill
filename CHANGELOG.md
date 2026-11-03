@@ -5,8 +5,7 @@
 
 ## v3.0.0 — 2026-10-29
 
-Download: [`precost-skill-v3.zip`](precost-skill-v3.zip?raw=1) ·
-Update an installed copy: [`prompts/cowork-update-to-v3.md`](prompts/cowork-update-to-v3.md)
+Download: [`precost-skill-v3.zip`](precost-skill-v3.zip?raw=1)
 
 ### Added
 - **Clarifying questions** — up to 3 (outcome, scope, frequency), asked only

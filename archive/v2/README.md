@@ -15,4 +15,5 @@ v2 screenshots (still in [`../../screenshots/`](../../screenshots/)):
 
 ![Adding /precost to a task in Cowork (v2)](../../screenshots/how-to-run.png)
 
-To move to v3, see [`../../prompts/cowork-update-to-v3.md`](../../prompts/cowork-update-to-v3.md).
+To move to v3, remove the old `precost` skill in Cowork (**Customize → Skills**)
+and upload [`precost-skill-v3.zip`](../../precost-skill-v3.zip?raw=1).

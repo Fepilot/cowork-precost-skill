@@ -4,7 +4,7 @@
 ![license MIT](https://img.shields.io/badge/license-MIT-green)
 ![status community / unofficial](https://img.shields.io/badge/status-community%20%2F%20unofficial-orange)
 
-**Jump to:** [What you get](#-what-you-get) · [How it works](#-how-it-works) · [Install](#-install-in-2-minutes) · [Update from v2](#-already-have-v2-update-in-one-prompt) · [What's new](#-whats-new-in-v3) · [The numbers](#-where-the-numbers-come-from) · [Limitations](#-limitations)
+**Jump to:** [What you get](#-what-you-get) · [How it works](#-how-it-works) · [Install](#-install-in-2-minutes) · [What's new](#-whats-new-in-v3) · [The numbers](#-where-the-numbers-come-from) · [Limitations](#-limitations)
 
 > [!IMPORTANT]
 > **Pre-cost is not an official Microsoft skill or feature. It is a community
@@ -74,17 +74,14 @@ The skill never starts your task until you choose. Step-by-step details are in
    precost."*
 3. Start a new chat, write a task and add `/precost`.
 
+**Already have v1 or v2?** Remove the old `precost` skill in **Customize →
+Skills** first, then upload v3.
+
 **Skill not in the `/` list?** Open a new chat or reopen Cowork. If you edited
 the description, keep it under 1,024 characters.
 
 Want to read it first? The unzipped files are in [`skill/`](skill/). Start with
 [`skill/SKILL.md`](skill/SKILL.md).
-
-## 🔄 Already have v2? Update in one prompt
-
-Attach `precost-skill-v3.zip` to a new Cowork chat and paste the prompt in
-[`prompts/cowork-update-to-v3.md`](prompts/cowork-update-to-v3.md). It replaces
-the old files, keeps the `/precost` command and includes a quick test.
 
 ---
 
