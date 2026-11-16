@@ -7,7 +7,15 @@ All images live in [`../screenshots/`](../screenshots/). Reference them from
 the README with relative paths (`screenshots/<file>.png`) so they render on
 GitHub.
 
-## v3 (current)
+## v3.1 (current)
+
+> [!NOTE]
+> The current screenshots show the **v3 card**. v3.1 adds the spend-size and
+> your-time rows; a v3.1 screenshot will be added here when available.
+
+<!-- screenshots/precost-v3.1-card.png — add the v3.1 card screenshot here and link it from the README -->
+
+## v3 screenshots (still used in the README)
 
 | File | What it shows | Used in |
 |---|---|---|

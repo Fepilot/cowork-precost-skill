@@ -14,7 +14,7 @@
 |---|---|---|
 | `HOURLY_RATE` | €75 / hour (= €1.25 / minute) | Blended knowledge-worker rate for "value". Change to yours. |
 | `CURRENCY` | € | Value currency. Cost is always USD (credits are USD-denominated). |
-| `MONTHLY_LIMIT` | 2,000 credits / user / month | PLANNING assumption: Microsoft asks admins to set at least 2,000 credits per user per month in a spending policy. Your org may set more — the user sees their real limit and balance with `/cost`. |
+| `ORG_MONTHLY_LIMIT` | *(blank)* | Optional. If your organization uses one known per-user monthly credit limit, write it here (e.g. 5,000) so the skill can show "% of your limit". Leave blank when limits differ per person — the skill then judges by spend size and never assumes a limit. |
 | `CREDIT_PRICE` | $0.01 / credit | OFFICIAL pay-as-you-go rate. Pre-purchase (P3) is up to 20% cheaper, so prepaid customers sit at or below the $ shown. |
 
 ---
@@ -69,7 +69,12 @@ multi-source or Max-effort runs.
 
 ## 3. One-level bump rules — PLANNING
 
-Move the class **at most one level**, by the single heaviest driver:
+Move the class **at most one level**, by the single heaviest driver. A signal
+that already set the base class in §2 cannot also bump it (no double counting):
+e.g. "web research on several topics" is what makes a one-deck task Medium — it
+does not also push it to Heavy. Web research on ≤ ~10 topics with one
+deliverable = Medium; Heavy needs long time frames, many outputs, or a heavy
+input / expensive tool on top.
 
 - **Up** if any: a heavy input (§6 ≥ ~2×: `.pptx`, scanned/photographed PDF,
   several images, very large files) · an expensive tool (§7) · many sources or
@@ -181,9 +186,7 @@ volume. Lean levers for automations: lower frequency, a tight trigger filter,
 | Heavy | 420–900 · ≈ $4.20–9 | 700–1,500 · ≈ $7–15 | 1,400–3,000 · ≈ $14–30 |
 
 Auto → show Efficient-low to Baseline-high for that class (e.g. Medium on Auto
-≈ 180–700). Share of monthly limit = upper end ÷ `MONTHLY_LIMIT` (2,000):
-300 → 15% · 420 → 21% · 600 → 30% · 700 → 35% · 900 → 45% · 1,400 → 70% ·
-1,500 → 75% · above 2,000 → "exceeds a 2,000 limit".
+≈ 180–700). Spend size and the share of credits left (when known) are in §11.
 
 ---
 
@@ -206,12 +209,42 @@ applies, say "already efficient" and drop the lean option.
 
 ---
 
-## 11. Sources (public)
+## 11. Spend size & caution level
+
+**Spend size — always shown, no assumption about the user's limit.** Absolute
+scale anchored to Microsoft's own task bands (§2). Use the upper end of the
+band:
+
+| Spend size | Upper end | ≈ USD | Bar (value ÷ 1,500, cap 100) |
+|---|---|---|---|
+| Small | ≤ 300 | ≤ $3 | `Good` |
+| Medium | 301–700 | ≤ $7 | `Good` |
+| Large | 701–1,500 | ≤ $15 | `Warning` |
+| Very large | > 1,500 | > $15 | `Attention` (above Microsoft's own "heavy" example) |
+
+**Credits left — only when known.** Source, in order: a `/cost` result already
+in the conversation → `ORG_MONTHLY_LIMIT` from §0 → otherwise **unknown**. The
+skill never asks for the balance and never assumes a personal limit (limits
+differ per person and policy; a skill can't run `/cost`, and the per-user
+balance API in Microsoft Graph is beta and admin-only).
+
+**Caution level — drives the verdict:**
+
+| Level | Balance known: share of what's left | Balance unknown: spend size | What changes |
+|---|---|---|---|
+| 🟢 Normal | ≤ 25% | Small / Medium | Normal verdict rules. With plenty left near the reset date, say so — unused credits don't carry over. |
+| 🟡 Careful | 25–60% | Large | Prefer the lean plan. If an M365 Copilot route gives the same outcome, recommend it unless Cowork clearly pays back (value ≥ 5× lean cost, see `value-and-routing.md` §2). |
+| 🟠 Big spend | — | Very large | ⚠️ "Big spend" verdict: recommend the lean plan or the M365 Copilot route, suggest splitting, and add the tip "type /cost (free) to check your balance first". |
+| 🔴 Critical | > 60%, or more than is left | — | ⛔ Don't run as written. Offer: lean (only if its upper end ≤ 60% of what's left), the M365 Copilot route, splitting the task, waiting for the reset (if ≤ 3 days away) or requesting credits from the admin. |
+
+---
+
+## 12. Sources (public)
 
 - Copilot Credits Guide (bands, buckets, P3, estimators) — https://www.microsoft.com/licensing/guidance/CopilotCreditsGuide
 - USL vs. usage-based billing (everyday vs. advanced AI, included models) — https://learn.microsoft.com/en-us/microsoft-365/copilot/user-subscription-license-usage-based-billing
 - Usage-based billing & Cost Management (services, estimator) — https://learn.microsoft.com/en-us/microsoft-365/copilot/usage-based-billing-overview-copilot-credits
-- Spending policies (2,000 credits/user minimum) — https://learn.microsoft.com/en-us/microsoft-365/copilot/usage-based-billing-manage-copilot-credits
+- Spending policies (admin-set per-user limits) — https://learn.microsoft.com/en-us/microsoft-365/copilot/usage-based-billing-manage-copilot-credits
 - `/cost` command — https://learn.microsoft.com/en-us/microsoft-365/copilot/usage-based-billing-copilot-credits-cost
 - Choose a model for Cowork (models, Auto, reasoning effort) — https://learn.microsoft.com/en-us/microsoft-365/copilot/cowork/cowork-models
 - What's new in Cowork (models, automations, browser, App skill) — https://learn.microsoft.com/en-us/microsoft-365/copilot/cowork/whats-new
