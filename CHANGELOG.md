@@ -3,6 +3,20 @@
 All versions of **Pre-cost**, an unofficial, community-built Copilot Cowork skill.
 Not an official Microsoft skill.
 
+## v3.1 — 2026-11-16
+
+### Added
+- **Spend size — no assumed limits.** Every card shows the spend size on an absolute scale anchored to Microsoft's task bands (Small ≤ 300 · Medium ≤ 700 · Large ≤ 1,500 · Very large > 1,500 credits). It never asks for your balance and never assumes a personal limit, because limits differ per person.
+- **Credits left, only when known.** If a `/cost` result is already in the chat (or your org sets one known limit in `ORG_MONTHLY_LIMIT`), the card adds "% of what's left". A skill can't run `/cost`, and the per-user balance API in Microsoft Graph is beta and admin-only.
+- **Caution levels** 🟢 normal · 🟡 careful · 🟠 big spend (from spend size) · 🔴 critical (only with a known balance), plus a ⛔ "Not enough credits" verdict with alternatives (lean, M365 Copilot route, split, wait for the reset, request credits).
+- **Your time on each route.** Hands-on minutes for the M365 Copilot flow vs. reviewing a Cowork result, shown on the card.
+- **"Cowork pays back" rule.** When the time saved is worth ≥ 3× the lean Cowork cost (≥ 5× when the caution level is 🟡 careful or 🟠 big spend), or the task needs brand-polished / matching deliverables, Cowork lean wins even if M365 Copilot could do it.
+- Reset-date logic: credits don't carry over, so plenty left near the reset is a reason to use them.
+
+### Fixed
+- **No double counting** in the size class: a signal that sets the base class can't also bump it (e.g. web research + one deck = Medium, not Heavy).
+- The M365 Copilot bar on the chart is labelled "0 Cowork credits" instead of looking empty.
+
 ## v3 — 2026-10-29
 
 **Rebuilt for the October 2026 Copilot pricing model and the current Cowork model picker.**

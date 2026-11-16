@@ -1,7 +1,8 @@
 # Make Pre-cost yours — upgrade ideas
 
-> **Pre-cost is not an official Microsoft skill.** It is a community example
-> built to show what anyone can do with Cowork skills. Use it as-is, as
+> **Pre-cost is not an official Microsoft skill or feature. It is a community
+> example — use it as inspiration and adapt it to your own business needs.**
+> It was built to show what anyone can do with Cowork skills. Use it as-is, as
 > inspiration, or as the starting point for your own skill. Change the
 > questions, the numbers and the routes to fit how *your* business works.
 
@@ -15,7 +16,7 @@ to get there.
 
 ## Step 0 — Get it into your Cowork first
 
-1. Download `precost-skill-v3.zip` from this repository.
+1. Download `precost-skill-v3.1.zip` from this repository.
 2. In Cowork, open **Customize → Skills → Add → Upload skill** and select the
    `.zip`. (Or open a new Cowork chat, attach the `.zip` and ask: *"Install this
    as my skill named precost."*)
@@ -87,13 +88,17 @@ Worked example (numbers from the v3 tables, €75/h default rate):
 Add the business impact (late reports, missed follow-ups) and the case gets
 stronger.
 
+v3.1 already includes a basic version of this rule ("Cowork pays back"). Tune
+the hands-on minutes in `skill/value-and-routing.md` §1b and the 3× / 5×
+margins in §2 to your teams.
+
 ---
 
 ## Idea 3 — Your own numbers
 
 Edit `pricing-reference.md` §0:
 - **Hourly rate by role** (e.g. analyst €55, manager €95, sales €80) instead of one blended €75.
-- **Your real monthly credit limit** (users can see theirs with `/cost`).
+- **A known org-wide limit**: if everyone has the same monthly credit limit, set `ORG_MONTHLY_LIMIT` in `pricing-reference.md` §0. Leave it blank when limits differ — the skill then uses spend size and never assumes a limit.
 - **Your currency** for value.
 - **Approved models** only — remove models your tenant does not offer.
 

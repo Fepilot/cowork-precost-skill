@@ -5,8 +5,8 @@ description: |
   Cowork task will cost before it runs. Reviews the prompt, asks up to 3 quick
   questions only if needed, then shows a visual card with credit band, ≈ USD,
   recommended model and effort, a leaner option with its minimum credits, the
-  no-extra-credit Microsoft 365 Copilot route, time saved and a verdict, then
-  asks how to proceed. Use when the user types "/precost", "precost", "/precost
+  no-extra-credit Microsoft 365 Copilot route, time saved, spend size and a
+  verdict, then asks how to proceed. Use when the user types "/precost", "precost", "/precost
   lite", "cost check", "estimate this task" or "is this worth running in
   Cowork". Do NOT use on follow-ups inside a running task or for the real cost
   of a finished task (that is /cost).
@@ -61,12 +61,19 @@ Extract the cost signals:
   ("whenever an email arrives…").
 - **Model & effort**: the current picker choice if the session shows it;
   otherwise "unknown — assumed Opus-class baseline".
+- **Credits left**: there is no way for a skill to read the balance (`/cost` is
+  a user-only command and the balance API is admin-only). If a `/cost` result is
+  already visible earlier in this conversation (credits used, % remaining,
+  reset date), use it. Else, if your organization filled in `ORG_MONTHLY_LIMIT`
+  in §0, use that as the limit. Otherwise the balance is **unknown** — do not
+  assume a limit, do not ask for it, never invent one; judge by spend size
+  instead (Step 3.7).
 
 ## Step 2 — Clarify only if it changes the answer
 
 Ask ONLY about unknowns that would move the class one level, change the route
-(Cowork vs. M365 Copilot) or multiply the cost (recurrence). If the prompt
-already answers them, skip this step entirely.
+(Cowork vs. M365 Copilot) or multiply the cost (recurrence). If the prompt and
+conversation already answer them, skip this step entirely.
 
 One AskUserQuestion call, max 3 questions, short options:
 - **Outcome** — "What should the result be?" → one doc / email / summary ·
@@ -77,7 +84,8 @@ One AskUserQuestion call, max 3 questions, short options:
 - **Frequency** — "Run once or repeat?" → one-off · weekly · daily or on every
   matching email/message.
 
-An empty answer = cancel: acknowledge and stop.
+When more than 3 unknowns remain, keep the ones that move the estimate most and
+assume defaults for the rest. An empty answer = cancel: acknowledge and stop.
 
 ## Step 3 — Estimate (Read `pricing-reference.md`)
 
@@ -85,7 +93,8 @@ An empty answer = cancel: acknowledge and stop.
    heaviest signal.
 2. **Bump** — up one class for ONE heavy driver (§3: heavy input, expensive tool
    or plugin, many sources); down one for a single trivial read on a light input.
-   Never stack bumps.
+   Never stack bumps, and never bump for a signal that already set the class in
+   step 1 (e.g. "many sources" makes it Medium OR bumps it, not both).
 3. **Model tier** — map the model to Efficient / Baseline / Premium (§4) and read
    the band from the lookup table (§9). Unknown model → Baseline.
 4. **Effort** — place the estimate inside the band (§5): Light → low end,
@@ -94,8 +103,13 @@ An empty answer = cancel: acknowledge and stop.
 5. **Recurrence** — automations: per run AND per month (§8).
 6. **Lean option** — same outcome with the levers in §10; its lower bound is the
    **lean minimum** (the least Cowork is likely to need).
-7. **Share of monthly limit** — upper end of the chosen band vs. `MONTHLY_LIMIT`
-   from §0 (state it is an assumption unless the user gave theirs).
+7. **Spend size & caution level** (§11) — always show the **spend size** of the
+   upper end on an absolute scale (Small ≤ 300 · Medium ≤ 700 · Large ≤ 1,500 ·
+   Very large > 1,500), which needs no knowledge of the user's limit. The
+   **caution level** that drives the verdict comes from the balance when known
+   (🟢 ≤ 25% of what's left · 🟡 25–60% · 🔴 > 60%), otherwise from spend size
+   (Small/Medium 🟢 · Large 🟡 · Very large 🟠). Note the reset date if a
+   `/cost` result shows it: credits do not carry over.
 
 Always quote ranges ("≈ 300–700 credits · ≈ $3–7"), never one exact number.
 
@@ -109,8 +123,15 @@ Always quote ranges ("≈ 300–700 credits · ≈ $3–7"), never one exact num
   Copilot in the apps, scheduled prompts or Copilot Chat, name the shortest
   flow (tools in order). These run within the Copilot license (fair use) and do
   not meter Cowork credits — unless the user picks a frontier model there.
-- **Verdict** (§2): ✅ Cowork as written · 🌱 Cowork, run it lean · 💡 Use
-  M365 Copilot instead · ⚠️ Rescope first.
+- **Your time on each route** (§1b): hands-on minutes for the M365 Copilot
+  flow vs. reviewing a Cowork result. "No Cowork credits" is not "free" when the
+  route costs the user much more time.
+- **Quality needs**: brand template, exec-ready polish, generated visuals or
+  several artifacts that must match favour Cowork.
+- **Verdict** (§2, check in order): ⛔ Not enough credits (only when the
+  balance is known) · ✅ Cowork as written · 🌱 Cowork, run it lean (incl.
+  "Cowork pays back") · 💡 Use M365 Copilot instead · ⚠️ Rescope first (incl.
+  "big spend").
 
 ## Step 5 — Show the card (Read `card-template.md`)
 
@@ -118,8 +139,9 @@ Invoke the `render-ui` skill and make ONE `render_ui` call with the template,
 filled in. Keep it compact: no extra sections, no restating the card in text.
 The card always carries: the verdict, the class, the three KPI tiles (credits,
 ≈ USD, time saved), the comparison bar (as written · lean · M365 Copilot), the
-recommended model + effort, the top cost drivers, the "run it lean" tips (only
-if they apply), the source link, the community-skill note and the disclaimer.
+recommended model + effort, your time on each route, the top cost drivers, the
+spend-size bar (plus credits left only when known), the "run it lean" tips (only if they
+apply), the source link, the community-skill note and the disclaimer.
 
 **Lite mode** (`/precost lite`, "text only", or the user asked for minimal
 credits): skip the card and `card-template.md`; reply with the 7-line text
@@ -134,7 +156,9 @@ Q1 "How do you want to run this?" — options (drop any that make no sense):
   at least ≈ <lean minimum> credits".
 - **Use M365 Copilot instead** — "<tool flow, e.g. Researcher → PowerPoint
   agent> · no Cowork credits".
-- **Rescope first** — only when the verdict is ⚠️.
+- **Rescope first** — only when the verdict is ⚠️ or ⛔ (split the task, wait
+  for the reset, or ask your admin for more credits — Cowork lets users request
+  credits when they reach their limit).
 
 Q2 (add only when the sustainable option is offered) "Credit budget for a
 sustainable run?" → "Lean minimum ≈ <N>" · "Up to ≈ <lean band top>" · "No
@@ -170,6 +194,10 @@ budget — just run it lean".
 - **Cheap by design.** Only the lookups listed at the top; one card; at most two
   question prompts (Step 2 + Step 6), plus the "paste your task" prompt only when
   no task was given. No re-runs on follow-ups.
+- **Honest about the balance.** Never claim to have checked credits. Say where
+  the number came from ("from your /cost above", "your org's limit"). When it is
+  unknown, say so and add one optional tip: "type /cost (free) before
+  /precost to add a budget check". Never assume a personal limit.
 - **Ranges, sourced.** Every number comes from the companion files; say "rough
   estimate" when the task doesn't map cleanly. The card links to the official
   Copilot Credits Guide used for the bands.

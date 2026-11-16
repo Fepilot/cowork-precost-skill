@@ -18,11 +18,13 @@
 | KPI 2 · Cost | ≈ USD (credits ÷ 100); small green "lean ≈ $…" |
 | KPI 3 · Time saved | ≈ minutes; small line "≈ €value at €75/h" (rate from §0) |
 | Automations | change labels to "Credits / run" and add to the subtitle "≈ X–Y / month" |
-| Bar chart | upper ends: as written (`warning`), lean (`good`), M365 Copilot route at 0 (`good`, name the tool flow). Drop a bar that doesn't apply; keep ≥ 2 bars |
+| Bar chart | upper ends: as written (`warning`), lean (`good`), M365 Copilot route at 0 — label it "M365 Copilot · <flow> · 0 Cowork credits" so the empty bar reads as zero, not missing. Drop a bar that doesn't apply; keep ≥ 2 bars |
+| Verdict ⛔ | container style `attention`: "⛔ Not enough credits for this as written — <best alternative>" |
 | Recommended | model · effort, with "(if in your picker; else Auto)" |
 | Cost drivers | the 2–4 signals that set the class (sources, outputs, inputs, tools, runs) |
 | Lean minimum | lower bound of the lean band (omit if no lean option) |
-| Monthly limit | % of `MONTHLY_LIMIT` from §9 + "assumed limit; /cost shows yours". ProgressBar: < 25% `Good` · 25–50% `Warning` · > 50% `Attention` |
+| Spend size | Always: "<Size> · upper ≈ <N> credits (≈ $<usd>)" from `pricing-reference.md` §11; then, only if the balance is known, " · ≈ <pct>% of your ~<N> left (from /cost)"; if unknown, " · credits left unknown — type /cost (free) before /precost for a budget check". ProgressBar value = upper ÷ 1,500 × 100, cap 100; color from §11 (`Good` / `Warning` / `Attention`). Never show an assumed limit. |
+| Your time | "M365 route ≈ <a> min hands-on · Cowork ≈ <b> min review" (from `value-and-routing.md` §1b) |
 | Run it lean | ≤ 3 levers from §10, short; drop the block if none |
 | Source link | always keep the Copilot Credits Guide link (the bands' source); keep the Model guide link when a model is recommended |
 | Footer | keep the community note + disclaimer text verbatim |
@@ -34,9 +36,9 @@
 {"columns":[{"items":[{"size":"Large","text":"💰 Cowork pre-check","type":"TextBlock","weight":"Bolder","wrap":true},{"isSubtle":true,"spacing":"None","text":"Contoso meeting prep → briefing doc + client deck + email to the team","type":"TextBlock","wrap":true}],"type":"Column","width":"stretch"},{"items":[{"size":"Large","style":"Warning","text":"MEDIUM","type":"Badge"}],"type":"Column","verticalContentAlignment":"Center","width":"auto"}],"type":"ColumnSet"},
 {"items":[{"text":"🌱 Verdict: worth it in Cowork — run it lean (≈ −40% credits)","type":"TextBlock","weight":"Bolder","wrap":true}],"spacing":"Small","style":"good","type":"Container"},
 {"columns":[{"items":[{"horizontalAlignment":"Center","isSubtle":true,"text":"Credits","type":"TextBlock","wrap":true},{"horizontalAlignment":"Center","size":"ExtraLarge","text":"≈ 300–700","type":"TextBlock","weight":"Bolder","wrap":true},{"color":"Good","horizontalAlignment":"Center","size":"Small","spacing":"None","text":"lean ≈ 180–420","type":"TextBlock","wrap":true}],"type":"Column","width":"stretch"},{"items":[{"horizontalAlignment":"Center","isSubtle":true,"text":"Cost","type":"TextBlock","wrap":true},{"horizontalAlignment":"Center","size":"ExtraLarge","text":"≈ $3–7","type":"TextBlock","weight":"Bolder","wrap":true},{"color":"Good","horizontalAlignment":"Center","size":"Small","spacing":"None","text":"lean ≈ $1.80–4.20","type":"TextBlock","wrap":true}],"type":"Column","width":"stretch"},{"items":[{"horizontalAlignment":"Center","isSubtle":true,"text":"Time saved","type":"TextBlock","wrap":true},{"horizontalAlignment":"Center","size":"ExtraLarge","text":"≈ 113 min","type":"TextBlock","weight":"Bolder","wrap":true},{"horizontalAlignment":"Center","isSubtle":true,"size":"Small","spacing":"None","text":"≈ €141 at €75/h","type":"TextBlock","wrap":true}],"type":"Column","width":"stretch"}],"spacing":"Medium","type":"ColumnSet"},
-{"data":[{"color":"warning","x":"Cowork as written · Opus-class","y":700},{"color":"good","x":"Cowork lean · Sonnet 5","y":420},{"color":"good","x":"M365 Copilot · Researcher → Word → PowerPoint","y":0}],"showLegend":false,"showTitle":true,"title":"Estimated credits (upper end)","type":"Chart.HorizontalBar"},
-{"facts":[{"title":"Recommended","value":"Sonnet 5 · effort Medium (if in your picker; else Auto)"},{"title":"Cost drivers","value":"4 sources · 2 deliverables + 1 email · 1 text PDF"},{"title":"Lean minimum","value":"≈ 180 credits"},{"title":"Monthly limit","value":"≈ 35% of 2,000 (lean ≈ 21%) — assumed limit; /cost shows yours"}],"spacing":"Medium","type":"FactSet"},
-{"color":"Warning","type":"ProgressBar","value":35},
+{"data":[{"color":"warning","x":"Cowork as written · Opus-class","y":700},{"color":"good","x":"Cowork lean · Sonnet 5","y":420},{"color":"good","x":"M365 Copilot · Researcher → Word → PowerPoint · 0 Cowork credits","y":0}],"showLegend":false,"showTitle":true,"title":"Estimated credits (upper end)","type":"Chart.HorizontalBar"},
+{"facts":[{"title":"Recommended","value":"Sonnet 5 · effort Medium (if in your picker; else Auto)"},{"title":"Cost drivers","value":"4 sources · 2 deliverables + 1 email · 1 text PDF"},{"title":"Lean minimum","value":"≈ 180 credits"},{"title":"Your time","value":"M365 route ≈ 30 min hands-on · Cowork ≈ 10 min review"},{"title":"Spend size","value":"Medium · upper ≈ 700 credits (≈ $7) · credits left unknown — type /cost (free) before /precost for a budget check"}],"spacing":"Medium","type":"FactSet"},
+{"color":"Good","type":"ProgressBar","value":47},
 {"type":"RichTextBlock","spacing":"Medium","inlines":[{"type":"TextRun","text":"Run it lean: ","weight":"Bolder","size":"Small"},{"type":"TextRun","text":"select Sonnet 5 · Medium before launching · last 30 days only · convert the PDF to .md","size":"Small"}]},
 {"type":"RichTextBlock","spacing":"Small","inlines":[{"type":"TextRun","text":"📘 How it's calculated — Copilot Credits Guide","size":"Small","color":"Accent","underline":true,"selectAction":{"type":"Action.OpenUrl","url":"https://www.microsoft.com/licensing/guidance/CopilotCreditsGuide"}},{"type":"TextRun","text":"  ·  ","size":"Small","isSubtle":true},{"type":"TextRun","text":"Model guide","size":"Small","color":"Accent","underline":true,"selectAction":{"type":"Action.OpenUrl","url":"https://learn.microsoft.com/en-us/microsoft-365/copilot/cowork/cowork-models"}}]},
 {"isSubtle":true,"size":"Small","spacing":"Medium","text":"Community skill — not an official Microsoft tool; adapt it freely. Estimate only (official planning bands × directional model factors), not your bill: actual usage depends on what runs — type /cost (free) afterwards. This pre-check itself uses a small number of credits.","type":"TextBlock","wrap":true}
@@ -50,7 +52,7 @@
 Verdict: <emoji + verdict>
 Estimate: ≈ <band> credits (≈ $<usd>) · lean ≈ <lean band> · M365 Copilot route: no Cowork credits (<tool flow>)
 Recommended: <model> · effort <level> (if in your picker; else Auto)
-Time saved: ≈ <min> min (≈ €<value>) · ≈ <pct>% of an assumed 2,000-credit month
+Time saved: ≈ <min> min (≈ €<value>) · your time: M365 ≈ <a> min vs Cowork ≈ <b> min · spend size <Size> (+ "≈ <pct>% of your credits left" only if known)
 Source: Copilot Credits Guide — https://www.microsoft.com/licensing/guidance/CopilotCreditsGuide
 Community skill, not official Microsoft · estimate, not your bill (/cost is free) · this check uses a few credits.
 ```

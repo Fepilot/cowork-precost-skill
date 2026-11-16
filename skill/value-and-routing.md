@@ -30,26 +30,62 @@ currency — show them side by side, never convert.
 
 ---
 
-## 2. Verdict rules (check in this order)
+## 1b. Your time on each route — PLANNING
 
-1. **💡 Use M365 Copilot instead** — a §3 route produces the same outcome:
-   no chained actions across apps (send + schedule + post…), at most 2–3
-   deliverables a recipe covers, no partner-system plugins, no browser or app
-   building, and any recurrence is a mail/calendar/Teams digest that scheduled
-   prompts can handle. Trade-off to state: a few manual hand-offs between apps.
-2. **⚠️ Rescope first** — the upper estimate of a one-off is > 50% of
-   `MONTHLY_LIMIT`, an automation's monthly projection exceeds it, the task is
-   Heavy on a Premium model without a clear need, or the outcome is still
-   vague after Step 2.
-3. **🌱 Cowork, run it lean** — Cowork is the right route and a lean lever cuts
-   the upper end by ≥ 30% (e.g. Baseline → Efficient = −40%).
-4. **✅ Cowork as written** — Cowork is the right route and it is already
-   efficient.
+"No Cowork credits" still costs the user's time: prompting, waiting, moving
+output between apps, fixing format. Planning minutes of hands-on time:
 
-Cowork is the right route when the task needs: multi-step work chained across
-apps, several deliverables with one consistent design, actions (send, schedule,
-post, update records), partner plugins/connectors, browser tasks, app building,
-long-running or event-driven automation.
+| M365 Copilot step (recipe in §4) | Hands-on minutes |
+|---|---|
+| Researcher report (A) | ≈ 10 |
+| Analyst / Excel analysis (B, E) | ≈ 10 |
+| Word document (C) | ≈ 10 |
+| PowerPoint deck (D) — add ≈ 10 more if it must be brand-polished | ≈ 10–15 |
+| Outlook / Teams step (F, G) | ≈ 5 |
+| Each hand-off between apps (copy, attach, re-prompt) | + 5 |
+
+Cowork route: ≈ 5–10 min to write the prompt and review the result
+(+ 5 per deliverable that needs a careful check).
+
+Example — research + polished 10–12 slide deck: M365 route = Researcher 10 +
+hand-off 5 + PowerPoint 15 (+ 10 brand polish) ≈ 30–40 min · Cowork ≈ 10 min.
+
+---
+
+## 2. Verdict rules (check in this order — first match wins)
+
+0. **⛔ Not enough credits** — caution 🔴, only possible when the balance is
+   known (`pricing-reference.md` §11).
+   Offer lean only if its upper end ≤ 60% of what's left; otherwise the M365
+   Copilot route, split the task, wait for the reset, or request credits.
+1. **Cowork-only work** → ✅ or 🌱 below. Cowork is the right route when the
+   task needs: multi-step work chained across apps, several deliverables with
+   one consistent design, actions (send, schedule, post, update records),
+   partner plugins/connectors, browser tasks, app building, long-running or
+   event-driven automation.
+2. **M365 Copilot can do it** (a §3 route gives the same outcome, no item from
+   rule 1) → decide on *total* cost, not credits alone:
+   - Time difference = M365 hands-on minutes − Cowork review minutes (§1b).
+   - Value of that time = difference × per-minute rate (§1).
+   - **🌱 "Cowork pays back"** when value ≥ 3× the lean Cowork upper cost in
+     USD (caution 🟢) or ≥ 5× (🟡 / 🟠) — the margin absorbs the currency difference, so no
+     exchange rate is needed — OR a quality need applies (brand template,
+     exec-ready polish, generated visuals, several matching artifacts) and the
+     caution level is 🟢. Say which reason won.
+   - Otherwise **💡 Use M365 Copilot instead** — state the trade-off ("≈ N min
+     more of your time, 0 Cowork credits").
+3. **⚠️ Rescope first** — the outcome is still vague after Step 2, a Heavy
+   task is set to a Premium model without a clear need, or caution is 🟠 Big
+   spend (show it as "⚠️ Big spend — run lean or split").
+4. Among Cowork verdicts: **🌱 run it lean** when a lean lever cuts the upper
+   end by ≥ 30% (Baseline → Efficient = −40%) or caution is 🟡; else
+   **✅ Cowork as written**.
+
+Worked example (research + polished deck, Medium, balance unknown → spend size
+Medium → 🟢): lean Cowork ≈ 180–420 credits (≈ $1.80–4.20). M365 route ≈ 30–40
+min vs Cowork ≈ 10 → 20–30 min ≈ €25–38 ≥ 3 × $4.20 → 🌱 Cowork pays back.
+If a `/cost` result in the chat shows only ~500 credits left: as written 700 =
+140% (🔴) and lean 420 = 84% (> 60%) → ⛔ → 💡 M365 Copilot route.
 
 ---
 

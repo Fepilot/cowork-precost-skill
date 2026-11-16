@@ -1,10 +1,10 @@
 # Pre-cost — know what a Cowork task will cost *before* you run it
 
-![version v3](https://img.shields.io/badge/version-v3-2f5fa6)
+![version v3.1](https://img.shields.io/badge/version-v3.1-2f5fa6)
 ![license MIT](https://img.shields.io/badge/license-MIT-4e8f49)
 ![status: community / unofficial](https://img.shields.io/badge/status-community%20%2F%20unofficial-f6c343)
 
-**Jump to:** [What you get](#what-you-get) · [How it works](#how-it-works) · [Install](#install-in-2-minutes) · [What's new in v3](#whats-new-in-v3) · [Where the numbers come from](#where-the-numbers-come-from) · [Make it yours](#make-it-yours) · [Limitations](#limitations) · [Contributing](#contributing) · [License](#license)
+**Jump to:** [What you get](#what-you-get) · [How it works](#how-it-works) · [Install](#install-in-2-minutes) · [Spend size](#spend-size--no-assumed-limits) · [What's new in v3.1](#whats-new-in-v31) · [Where the numbers come from](#where-the-numbers-come-from) · [Make it yours](#make-it-yours) · [Limitations](#limitations) · [Contributing](#contributing) · [License](#license)
 
 > [!IMPORTANT]
 > **Pre-cost is not an official Microsoft skill or feature. It is a community
@@ -26,13 +26,16 @@ good route: Cowork, Cowork lean, or Microsoft 365 Copilot.
   <img src="screenshots/precost-v3-card-heavy-deck.png" alt="Pre-cost v3 card for a business idea turned into a researched 10–12 slide pitch deck: Heavy badge, verdict 'use M365 Copilot instead', about 700–1,500 credits, about $7–15, about 84 minutes saved, a bar chart comparing Cowork as written, Cowork lean and the M365 Copilot route, and a recommended model and effort" width="640">
 </p>
 
+<p align="center"><em>v3 card shown — v3.1 adds the spend-size and your-time rows.</em></p>
+
 One compact card, then one question: how do you want to run it?
 
-1. **Verdict** — ✅ Cowork as written · 🌱 Cowork, run it lean · 💡 Use M365 Copilot instead · ⚠️ Rescope first.
+1. **Verdict** — ✅ Cowork as written · 🌱 Cowork, run it lean (incl. "Cowork pays back") · 💡 Use M365 Copilot instead · ⚠️ Rescope first (incl. "Big spend") · ⛔ Not enough credits (only when your balance is known).
 2. **Class badge** — Light, Medium or Heavy, from Microsoft's published task bands.
 3. **Three tiles** — credits, ≈ USD and time saved, with the lean values underneath.
 4. **Comparison chart** — Cowork as written vs. Cowork lean vs. the Microsoft 365 Copilot route.
-5. **Recommended model + effort and source link** — plus cost drivers, the lean minimum, the share of a monthly limit and a link to the official Copilot Credits Guide.
+5. **Recommended model + effort and source link** — plus cost drivers, the lean minimum, the spend size (Small · Medium · Large · Very large) — plus your share of credits left only if a `/cost` result is already in the chat — and a link to the official Copilot Credits Guide.
+6. **Your time** — hands-on minutes on the Microsoft 365 Copilot route vs. reviewing a Cowork result.
 
 ---
 
@@ -44,7 +47,8 @@ flowchart LR
   B -- no --> C[Up to 3 quick questions]
   B -- yes --> D[Estimate from official bands]
   C --> D
-  D --> E[Visual card + verdict + source link]
+  D --> S[Spend size + caution level<br/>credits left only if /cost is in the chat]
+  S --> E[Visual card + verdict + source link]
   E --> F{Your choice}
   F --> G[Proceed in Cowork<br/>recommended model & effort]
   F --> H[Cowork sustainable<br/>lean plan + minimum credits]
@@ -70,9 +74,29 @@ Want the details — the 7 steps, the lookup table and the verdict rules? See
 
 ---
 
+## Spend size — no assumed limits
+
+Credit limits differ per person, and a skill can't run `/cost` or read your
+balance. So Pre-cost never asks for it and never assumes one. Every card rates
+the spend on a fixed scale anchored to Microsoft's task bands:
+
+| Spend size | Upper estimate | ≈ cost |
+|---|---|---|
+| Small | up to 300 credits | up to $3 |
+| Medium | 301–700 | up to $7 |
+| Large | 701–1,500 | up to $15 |
+| Very large | over 1,500 | over $15 |
+
+**Tip:** type `/cost` (free) before `/precost` and the card also shows your
+share of credits left — the same task is a different decision with 1,800
+credits left than with 300. Organizations with one known limit can set
+`ORG_MONTHLY_LIMIT` in [`skill/pricing-reference.md`](skill/pricing-reference.md) §0.
+
+---
+
 ## Install in 2 minutes
 
-1. Download [`precost-skill-v3.zip`](precost-skill-v3.zip?raw=1).
+1. Download [`precost-skill-v3.1.zip`](precost-skill-v3.1.zip?raw=1).
 2. In Cowork: **Customize → Skills → Add → Upload skill** → select the zip
    (or attach it in a new Cowork chat and ask *"Install this as my skill named
    precost"*).
@@ -93,7 +117,17 @@ start with [`skill/SKILL.md`](skill/SKILL.md).
 
 ---
 
-## What's new in v3
+## What's new in v3.1
+
+- **Spend size, no assumed limits** — fixed Small / Medium / Large / Very large scale; credits left only when known.
+- **Caution levels** 🟢 normal · 🟡 careful · 🟠 big spend · 🔴 critical, and a ⛔ "Not enough credits" verdict.
+- **Your time on each route** — Microsoft 365 Copilot hands-on minutes vs. reviewing a Cowork result.
+- **"Cowork pays back"** — Cowork lean wins when your time saved is worth ≥ 3× its cost (≥ 5× when careful), or the deliverable needs brand polish.
+- **No double counting** — e.g. web research + one deck is Medium, not Heavy.
+- **Clearer chart** — the Microsoft 365 Copilot bar is labelled "0 Cowork credits".
+
+<details>
+<summary>v3 highlights</summary>
 
 - **Clarify first.** Up to 3 quick questions (outcome, scope, frequency) — only when the answer would change the estimate.
 - **Visual card v3.** Verdict, class badge, three KPI tiles, a comparison chart, recommended model + effort and a link to the official source.
@@ -103,6 +137,8 @@ start with [`skill/SKILL.md`](skill/SKILL.md).
 - **Automations.** Scheduled and event-driven tasks show cost per run and per month.
 - **Lite mode.** `/precost lite` returns a 7-line text summary for the cheapest possible check.
 - **Opt-in and never runs your task by itself.** It waits for your choice and a "go". No CO₂ or energy claims.
+
+</details>
 
 Full details in [`CHANGELOG.md`](CHANGELOG.md).
 
@@ -118,6 +154,9 @@ Full details in [`CHANGELOG.md`](CHANGELOG.md).
 | Credit price | $0.01 per credit, pay-as-you-go | Official |
 | Model tiers | Efficient ×0.6 · Baseline ×1.0 · Premium ×2.0 · Auto ×0.6–1.0 | *Directional assumption* of this community skill — Microsoft does not publish per-model Cowork rates |
 | Time saved | e.g. analysis & research ≈ 60 min, a document ≈ 24 min; valued at €75/h by default | Planning estimate |
+| Spend size | Small ≤ 300 · Medium ≤ 700 · Large ≤ 1,500 · Very large > 1,500 credits | This skill's scale, anchored to the official bands |
+| Your time per route | e.g. Researcher ≈ 10 min, PowerPoint ≈ 10–15 min, each hand-off + 5 min | Planning estimate |
+| "Cowork pays back" margin | ≥ 3× (🟢) / ≥ 5× (🟡 🟠) the lean Cowork cost | Planning rule of this skill |
 
 The full tables are in [`skill/pricing-reference.md`](skill/pricing-reference.md)
 and [`skill/value-and-routing.md`](skill/value-and-routing.md).
@@ -156,7 +195,9 @@ more of your own time.
 | Credits per month (4 runs) | 0 | ≈ 720–1,680 (≈ $7.20–16.80) |
 | Time value of the difference | — | 30 min × 4 runs ≈ **€150 / month** |
 
-For that team, Cowork pays back even though it is metered.
+For that team, Cowork pays back even though it is metered. v3.1 already applies
+a basic version of this rule ("Cowork pays back"); tune the minutes and margins
+in [`skill/value-and-routing.md`](skill/value-and-routing.md) §1b–§2.
 
 ---
 
@@ -167,6 +208,7 @@ For that team, Cowork pays back even though it is metered.
 - **Model availability depends on your tenant.** Admins can turn models on or off.
 - **The budget is a target, not a cap.** Only admin spending limits cap spend.
 - **No CO₂ figures.** "Sustainable" means the same outcome with fewer credits.
+- **Your credits left are unknown** unless you typed `/cost` earlier in the chat — the skill never assumes a personal limit.
 
 The real numbers are always `/cost` (free) and the Cost Management dashboard
 after the task.
@@ -180,7 +222,7 @@ routes. Please **never** include confidential data, internal links, tenant
 names or private screenshots.
 
 Earlier versions are kept under [`archive/`](archive/) ([v1](archive/v1/),
-[v2](archive/v2/)).
+[v2](archive/v2/), [v3](archive/v3/)).
 
 ---
 
