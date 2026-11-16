@@ -22,13 +22,9 @@ good route: Cowork, Cowork lean, or Microsoft 365 Copilot.
 
 ## Watch the tutorial
 
-<p align="center">
-  <a href="https://youtu.be/6RYECsEkqr8">
-    <img src="https://i.ytimg.com/vi/6RYECsEkqr8/sddefault.jpg" alt="Watch the Pre-cost tutorial on YouTube" width="640">
-  </a>
-  <br>
-  <em>▶️ Click to watch the Pre-cost tutorial on YouTube.</em>
-</p>
+https://github.com/user-attachments/assets/0ad87753-72db-4b1f-87aa-d2f7175d48c1
+
+<p align="center"><em>▶️ Plays right here on GitHub — or <a href="https://youtu.be/6RYECsEkqr8">watch it on YouTube</a>.</em></p>
 
 ---
 
