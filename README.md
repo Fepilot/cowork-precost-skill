@@ -4,7 +4,7 @@
 ![license MIT](https://img.shields.io/badge/license-MIT-4e8f49)
 ![status: community / unofficial](https://img.shields.io/badge/status-community%20%2F%20unofficial-f6c343)
 
-**Jump to:** [What you get](#what-you-get) · [How it works](#how-it-works) · [Install](#install-in-2-minutes) · [Spend size](#spend-size--no-assumed-limits) · [What's new in v3.1](#whats-new-in-v31) · [Where the numbers come from](#where-the-numbers-come-from) · [Make it yours](#make-it-yours) · [Limitations](#limitations) · [Contributing](#contributing) · [License](#license)
+**Jump to:** [Tutorial](#watch-the-tutorial) · [What you get](#what-you-get) · [How it works](#how-it-works) · [Install](#install-in-2-minutes) · [Spend size](#spend-size--no-assumed-limits) · [What's new in v3.1](#whats-new-in-v31) · [Where the numbers come from](#where-the-numbers-come-from) · [Make it yours](#make-it-yours) · [Limitations](#limitations) · [Contributing](#contributing) · [License](#license)
 
 > [!IMPORTANT]
 > **Pre-cost is not an official Microsoft skill or feature. It is a community
@@ -17,6 +17,18 @@
 Pre-cost is a Copilot Cowork skill. Add `/precost` to a task and it estimates
 the credits, cost and value *before* anything runs — then suggests the cheapest
 good route: Cowork, Cowork lean, or Microsoft 365 Copilot.
+
+---
+
+## Watch the tutorial
+
+<p align="center">
+  <a href="https://youtu.be/6RYECsEkqr8">
+    <img src="https://i.ytimg.com/vi/6RYECsEkqr8/sddefault.jpg" alt="Watch the Pre-cost tutorial on YouTube" width="640">
+  </a>
+  <br>
+  <em>▶️ Click to watch the Pre-cost tutorial on YouTube.</em>
+</p>
 
 ---
 
